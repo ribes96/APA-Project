@@ -1,0 +1,48 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{subfiles}
+\usepackage{graphicx}
+\graphicspath{{images/}{../images/}}
+
+\newcommand{\addfile}[1]{\subfile{sections/#1/#1}}
+
+\iffalse
+
+% Code to insert images
+\begin{figure}[bh]
+\centering
+\includegraphics[width=4cm]{imageName}
+\label{fig:img1}
+\caption{The caption of the image}
+\end{figure}
+
+
+\fi
+
+
+\title{Título}
+\author{
+Albert Ribe
+\and
+Kerstin Winter
+}
+
+\begin{document}
+  \maketitle
+  \tableofcontents
+
+  \addfile{introduction}
+  % \addfile{work-and-goals}
+  \addfile{related-previous-work}
+  \addfile{data-exploration-process}
+  \addfile{resampling-protocol}
+  \addfile{results-linear}
+  \addfile{results-non-linear}
+  \addfile{model-chosen}
+  \addfile{self-assessment}
+  \addfile{conclusion}
+  \addfile{extensions}
+  \addfile{references}
+
+\end{document}
