@@ -3,6 +3,19 @@
 \usepackage[english]{babel}
 \usepackage{subfiles}
 \usepackage{graphicx}
+\usepackage{csquotes}
+
+\usepackage{biblatex}
+\addbibresource{biblio.bib}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
 \graphicspath{{images/}{../images/}}
 
 \newcommand{\addfile}[1]{\subfile{sections/#1/#1}}
@@ -21,9 +34,9 @@
 \fi
 
 
-\title{Título}
+\title{APA- Practical Work 2017-2018}
 \author{
-Albert Ribe
+Albert Ribes
 \and
 Kerstin Winter
 }
@@ -43,6 +56,8 @@ Kerstin Winter
   \addfile{self-assessment}
   \addfile{conclusion}
   \addfile{extensions}
-  \addfile{references}
+  % \addfile{references}
+
+  \printbibliography
 
 \end{document}
