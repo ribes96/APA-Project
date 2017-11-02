@@ -4,6 +4,7 @@
 \usepackage{subfiles}
 \usepackage{graphicx}
 \usepackage{csquotes}
+\usepackage{todonotes}
 
 \usepackage{biblatex}
 \addbibresource{biblio.bib}
@@ -30,6 +31,11 @@
 \caption{The caption of the image}
 \end{figure}
 
+% To insert a todo item
+\todo[inline]{This is a todo item}
+
+
+
 
 \fi
 
@@ -44,6 +50,7 @@ Kerstin Winter
 \begin{document}
   \maketitle
   \tableofcontents
+  \listoftodos % Remove when done
 
   \addfile{introduction}
   % \addfile{work-and-goals}
