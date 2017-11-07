@@ -4,8 +4,33 @@
 
 \subsection{Desciption of the work and its goals}
 
-The information is taken from
+The goal of this project is to build a classification model to predict whether
+a lung cancer patient will die within one year after surgery or not. To do so
+we will study a dataset with real lung cancer patients.
+
+As this is very sensitive information, our priority will be to minimize the
+amount of falses negatives, i. e, avoid predicting a patient will not die within
+one year when it certainly does.
+
+
+The data is taken from
 \url{https://archive.ics.uci.edu/ml/datasets/Thoracic+Surgery+Data#}
 \cite{zieba2013boosted}
 
 \subsection{Desciption of available data}
+
+The data we are working with is about patients who underwent major lung
+resections for primary lung cancer in the years from 2007 to 2011. For each
+patient we are given information about his diagnosis and effects produced
+by the cancer.
+
+The dataset is very limited in the number of instances available: it only has
+470. In addition, the distribution of the predicted class isn't quite balanced,
+since only 70 of the patients died in one year period. This may become a problem
+in some of the prediction models due to the fact that the results will be biased
+towards the biggest class. However, we can suppose that the data has been
+collected uniformly and that this proportion is similar to the real one.
+
+For each patient we have 16 different atributes. 3 of them are numerical, and
+the rest are categorical. From those, 10 are binary. The response atribute is
+also binary.

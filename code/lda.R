@@ -1,4 +1,4 @@
-library(MASS)
+ilibrary(MASS)
 aa = lda(thoraric[c(1:16)], thoraric[,"DIED"])
 negatives = thoraric[thoraric[,"DIED"] == F,]
 mean.true = aa$means[2,]
