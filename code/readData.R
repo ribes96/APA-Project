@@ -33,3 +33,5 @@ thoraric$PAD = as.logical(thoraric$PAD)
 thoraric$SMOKE = as.logical(thoraric$SMOKE)
 thoraric$ASTHMA = as.logical(thoraric$ASTHMA)
 thoraric$DIED = as.logical(thoraric$DIED)
+
+

@@ -9,9 +9,16 @@ Our dataset do not have missing values, so there is no need to treat them.
 \red{Quizá hay que quitar algunas personas por ser demasiado jóvenes comparadas con el resto}
 \subsubsection{Treatment of incoherent values}
 \todo[inline]{Mirar si tenemos valores incoherentes}
+\red{El FEV1 tiene valores incoherentes. La mayoría están sobre 3, pero algunos
+están sobre 60}
 \subsubsection{Coding of non-continuous or non-ordered variables}
-\subsubsection{Posible elimination of irrelevant variables}
+\todo[inline]{El código que convierta nuestras variables categóricas en tiras
+de 0s y 1s}
+\subsubsection{Possible elimination of irrelevant variables}
 \red{Algunas variables están muy poco representadas:}
+\red{Haremos los experimentos dos veces, uno con todos los datos originales,
+y otro quitando el atributo de MI, ASHTMA, DGN1 y DGN8, y entonces veremos cual
+da mejores resultados}
 \begin{itemize}
   \item DGN: Solo un paciente tiene DGN1, y solo 2 tienen DGN8
   \item Solo 2 pacientes tienen MI == True
@@ -19,10 +26,24 @@ Our dataset do not have missing values, so there is no need to treat them.
   \item Solo 2 pacientes tienen ASHTMA == True
 \end{itemize}
 \subsubsection{Creation of new useful variables (Feature extraction)}
+\red{Miraremos de hacer LDA y veremos qué combinaciones lineales son más
+interesantes. Después haremos los experimentos con y sin LDA y veremos cuál da
+mejores resultados }
 \subsubsection{Normalization of the variables}
+\red{Solo se pueden normalizar FVC, FEV1 y AGE. Miraremos cuales dan mejores
+resultados}
 \subsubsection{Transformation of the variables}
-
+\red{Skewness es la asimetría de los datos respecto a la media.}
+\red{Como la mayoría de nuestras variables son categóricas, no tiene mucho
+sentido medir el skewness, ni tampoco corregirlo}
+\red{Kurtosis igual que el skewness, no es necesario porque la mayoría con
+categóricas}
+ % consultar si debemos ignorar este punto
+\todo[inline]{El código en r para corregir la asimetría (skewness) de los datos}
 
 \subsection{Feature extraction/selection}
 \subsection{Clustering}
+\red{hacer varios k-means con distintos valores de k (2,3,4,5,6) para ver si descubrimos algún cluster que nos permita crear una variable nueva}
 \subsection{Visualization}
+\red{Hacer PCA o LDA y hacemos algunos gráficos usando únicamente las
+``dimensiones'' más relevantes, y quizá sale algo interesante }
