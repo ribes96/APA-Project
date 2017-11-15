@@ -10,6 +10,11 @@ Our dataset do not have missing values, so there is no need to treat them.
 \subsubsection{Treatment of anomalous values}
 \red{Quizá hay que quitar algunas personas por ser demasiado jóvenes comparadas con el resto}
 \subsubsection{Treatment of incoherent values}
+The variable FEV1 which is the Forced Expiratory Volume in 1 second, shows a few anomalously high values. Depending on factors lika age and sex of a patient the average value of the FEV1 is around 3-6 litres, whereas the dataset shows values up to 86. As most of the values are within 0 and 10 we assume that the dataset contains the FEV1 in litres. To decide which values are to be determined as outliers we calculate the FEV1/FVC ratio which gives the percentage of the lung volume exhaled in the first second over the whole exhaled volume. All patients having a unrealistic ratio higher than 100\%, which are 22 patients, are determined to be outliers and eliminated.
+
+Source of knowledge about FEV1 and FVC:
+https://www.nuvoair.com/blogs/blog/do-you-know-how-to-interpret-the-results-of-your-spirometry-test
+
 \todo[inline]{Redactar que FEV1 está mal, referenciar algún artículo que hable
 sobre el tema y para justificar que está mal, decidir qué haremos con esos pacientes (eliminarlos, o inferir
 sus valores de FEV1 en función de sus vecinos) y si los inferimos poner el proceso
