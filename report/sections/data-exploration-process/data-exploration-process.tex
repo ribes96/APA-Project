@@ -1,19 +1,30 @@
 % 3. The relevant data exploration process (pre-processing, feature extraction/selection,
 % clustering and visualization)
+
+
 \section{Data exploration process}
 
 \subsection{Pre-processing}
 \subsubsection{Treatment of missing values}
 Our dataset do not have missing values, so there is no need to treat them.
-\subsection{Treatment of anomalous values}
+\subsubsection{Treatment of anomalous values}
 \red{Quizá hay que quitar algunas personas por ser demasiado jóvenes comparadas con el resto}
 \subsubsection{Treatment of incoherent values}
-\todo[inline]{Mirar si tenemos valores incoherentes}
+\todo[inline]{Redactar que FEV1 está mal, referenciar algún artículo que hable
+sobre el tema y para justificar que está mal, decidir qué haremos con esos pacientes (eliminarlos, o inferir
+sus valores de FEV1 en función de sus vecinos) y si los inferimos poner el proceso
+como lo hemos hecho}
 \red{El FEV1 tiene valores incoherentes. La mayoría están sobre 3, pero algunos
 están sobre 60}
+\begin{figure}[bh]
+\centering
+\includegraphics[width=10cm]{histFEV1}
+\label{fig:histFEV1}
+\caption{Show the ammount of people having each value}
+\end{figure}
 \subsubsection{Coding of non-continuous or non-ordered variables}
-\todo[inline]{El código que convierta nuestras variables categóricas en tiras
-de 0s y 1s}
+% \todo[inline]{El código que convierta nuestras variables categóricas en tiras
+% de 0s y 1s}
 \subsubsection{Possible elimination of irrelevant variables}
 \red{Algunas variables están muy poco representadas:}
 \red{Haremos los experimentos dos veces, uno con todos los datos originales,
@@ -26,9 +37,8 @@ da mejores resultados}
   \item Solo 2 pacientes tienen ASHTMA == True
 \end{itemize}
 \subsubsection{Creation of new useful variables (Feature extraction)}
-\red{Miraremos de hacer LDA y veremos qué combinaciones lineales son más
-interesantes. Después haremos los experimentos con y sin LDA y veremos cuál da
-mejores resultados }
+\red{Entender cómo funciona MCA, y ver si podemos sacar una variable nueva}
+\red{(Quizá)Categorizar nuestras variables numéricas, }
 \subsubsection{Normalization of the variables}
 \red{Solo se pueden normalizar FVC, FEV1 y AGE. Miraremos cuales dan mejores
 resultados}
@@ -40,10 +50,19 @@ sentido medir el skewness, ni tampoco corregirlo}
 categóricas}
  % consultar si debemos ignorar este punto
 \todo[inline]{El código en r para corregir la asimetría (skewness) de los datos}
+\red{Es aceptable un skewness entre -2 y +2. AGE y FVC ya están en este rango, por
+lo tanto no hay que hacer nada con ellos. FEV1 sí que se sale, pero los datos que
+tiene son erroneos. Por lo tanto los transformatemos de alguna forma (eliminarlos
+o inferirlos) y miraremos el skewness de esos nuevos datos. (suponemos que entonces
+sí que estarán en ese rango, y por tanto no habrá que aplicar la transformación)}
 
-\subsection{Feature extraction/selection}
+\red{Referenciar (y leer un poco...) el paper}
+
+https://www.researchgate.net/publication/281345819_The_Research_Methods_Knowledge_Base
+
+
+% \subsection{Feature extraction/selection}
 \subsection{Clustering}
 \red{hacer varios k-means con distintos valores de k (2,3,4,5,6) para ver si descubrimos algún cluster que nos permita crear una variable nueva}
 \subsection{Visualization}
-\red{Hacer PCA o LDA y hacemos algunos gráficos usando únicamente las
-``dimensiones'' más relevantes, y quizá sale algo interesante }
+\red{Hacer MCA  }
