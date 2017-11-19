@@ -15,12 +15,18 @@ The variable FEV1 which is the Forced Expiratory Volume in 1 second, shows a few
 Source of knowledge about FEV1 and FVC:
 https://www.nuvoair.com/blogs/blog/do-you-know-how-to-interpret-the-results-of-your-spirometry-test
 
-\todo[inline]{Redactar que FEV1 está mal, referenciar algún artículo que hable
-sobre el tema y para justificar que está mal, decidir qué haremos con esos pacientes (eliminarlos, o inferir
-sus valores de FEV1 en función de sus vecinos) y si los inferimos poner el proceso
-como lo hemos hecho}
-\red{El FEV1 tiene valores incoherentes. La mayoría están sobre 3, pero algunos
-están sobre 60}
+\red{No sé si por outliers se entiende a datos que son verdad pero que son
+raros o si son datos que no son correctos, porque se van demasiado}
+
+\red{Referenciar quizá el histograma con FEV1}
+
+
+% \todo[inline]{Redactar que FEV1 está mal, referenciar algún artículo que hable
+% sobre el tema y para justificar que está mal, decidir qué haremos con esos pacientes (eliminarlos, o inferir
+% sus valores de FEV1 en función de sus vecinos) y si los inferimos poner el proceso
+% como lo hemos hecho}
+% \red{El FEV1 tiene valores incoherentes. La mayoría están sobre 3, pero algunos
+% están sobre 60}
 \begin{figure}[bh]
 \centering
 \includegraphics[width=10cm]{histFEV1}
@@ -46,10 +52,16 @@ Some of the variables of our dataset are not well represented. In particular:
 \end{tabular}
 \end{center}
 
-\todo[inline]{Redactar bien esta parte, indicando que puesto que tenemos pocos
-datos, podemos permitirnos hacer varias ejecuciones, y que probaremos cada
-combinación de eliminar y no eliminar cada una de estas variables y veremos
-cual da mejores resultados con la cross-validation}
+Hence the normal thing to do would be to eliminate those columns in our dataset,
+since they do not provide good information. However, as we have very few instances
+we can afford to try out keeping and removing them. We will run our models with
+each of the 16 combinations of keeping DGN1, DGN8, PAD and ASHTMA and we will
+see which one works better.
+
+% \todo[inline]{Redactar bien esta parte, indicando que puesto que tenemos pocos
+% datos, podemos permitirnos hacer varias ejecuciones, y que probaremos cada
+% combinación de eliminar y no eliminar cada una de estas variables y veremos
+% cual da mejores resultados con la cross-validation}
 
 %
 % \red{Algunas variables están muy poco representadas:}
@@ -64,13 +76,28 @@ cual da mejores resultados con la cross-validation}
 % \end{itemize}
 \subsubsection{Creation of new useful variables (Feature extraction)}
 \red{Entender cómo funciona MCA, y ver si podemos sacar una variable nueva}
+
 \red{Quizá es interesante añadir la variable FEV/FEV1}
 \subsubsection{Normalization of the variables}
-We need to normalize only our numeric variables, which are the AGE, FEV and FV1.
+We need to normalize only our numeric variables, which are the AGE, FVC and FEV1.
+To normalize the age we will only consider cases between $0$ and $100$ years old.
+For FVC and FEV1 the maximum will correspond to $1.2K_{FVC}$ and $1.2K_{FEV1}$,
+where $K_{FVC}$ is the maximum observed FVC and $K_{FEV1}$ is the maximum
+observed FEV1.
 
 
-\red{Solo se pueden normalizar FVC, FEV1 y AGE. Miraremos cuales dan mejores
-resultados}
+\red{Sería posible hacer la edad más ajustada, entre el máximo y el mínimo}
+
+\red{Hablar sobre ese 1.2 (podría ser cualquier otro)}
+
+\red{Quizá se puede usar el mismo máximo para FVC y FEV1, que sería el que
+corresponde a FVC, pues el es mayor}
+
+\red{Si finalmente añadimos el atributo FEV1/FVC, indicar que no hace falta
+estandarizarlo puesto que ya lo está}
+
+% \red{Solo se pueden normalizar FVC, FEV1 y AGE. Miraremos cuales dan mejores
+% resultados}
 \subsubsection{Transformation of the variables}
 Acording to \red{the paper we found} the accetable range for skewness in a numeric
 variable is $(-2, +2)$. The skewness of our original variables AGE, FVC and FEV are:
