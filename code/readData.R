@@ -23,6 +23,9 @@ names(thoraric) = c(
   "AGE",
   "DIED"
   )
+thoraric$PERFORMANCE = as.numeric(thoraric$PERFORMANCE)
+thoraric$SIZE = as.numeric(thoraric$SIZE)
+
 thoraric$PAIN = as.logical(thoraric$PAIN)
 thoraric$HAEMOPTYSIS = as.logical(thoraric$HAEMOPTYSIS)
 thoraric$DISPNOEA = as.logical(thoraric$DISPNOEA)
