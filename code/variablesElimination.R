@@ -1,3 +1,5 @@
+# Removes some variables
+
 keep = c(
 "FVC"  ,       "FEV1"       , "PERFORMANCE" ,"PAIN"      ,  "HAEMOPTYSIS",
 "DISPNOEA",    "COUGH"     ,  "WEAKNESS"  ,  "SIZE"     ,   "DIABETES"   ,
@@ -6,7 +8,6 @@ keep = c(
 "DGN.5"    ,   "DGN.6"
 )
 
-thoraric = thoraric[,keep]
-
-thoraric = thoraric[thoraric$FEV1 <= thoraric$FVC,]
+thoraric.removed = thoraric[,keep]
+thoraric.original = thoraric
 

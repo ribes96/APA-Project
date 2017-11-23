@@ -1,9 +1,11 @@
 library("foreign")
 # Solo para Albert
-setwd("/home/hobber/git/APA-Project/dataset")
-
+#setwd("/home/hobber/git/APA-Project/dataset")
+pathAlbert = "/home/hobber/git/APA-Project/dataset/ThoraricSurgery.arff"
+pathKerstin = "path Kerstin"
 #setwd("../dataset")
-thoraric = read.arff("ThoraricSurgery.arff")
+#thoraric = read.arff("ThoraricSurgery.arff")
+thoraric = read.arff(pathAlbert)
 names(thoraric) = c(
   "DGN",
   "FVC", #Forced Vital Capacity

@@ -1,9 +1,13 @@
 
-FEV1.max = max(thoraric$FEV1)
-FEV1.min = min(thoraric$FEV1)
+margin = 0.2
 
-FVC.max = max(thoraric$FVC)
-FVC.min = min(thoraric$FVC)
+FEV1.max = (1 + margin) * max(thoraric$FEV1)
+FEV1.min = (1 - margin) * min(thoraric$FEV1)
+
+FVC.max = (1 + margin) * max(thoraric$FVC)
+FVC.min = (1 - margin) * min(thoraric$FVC)
 
 thoraric$FVC = (thoraric$FVC - FVC.min)/(FVC.max - FVC.min)
 thoraric$FEV1 = (thoraric$FEV1 - FEV1.min)/(FEV1.max - FEV1.min)
+
+#TODO queda normalizar AGE, y quizá SIZE y PERFORMANCE
