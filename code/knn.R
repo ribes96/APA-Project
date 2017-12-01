@@ -1,15 +1,7 @@
 library("caret")
-
-knn = function(train, test, k) {
-  library("class")
-  #library("KODAMA")
-
-  #TODO
-}
-
+library("class")
 
 test = thoraric.removed[1,-14]
-
 train = thoraric.removed[-1,]
 k.knn = as.integer(sqrt(nrow(train)))
 
@@ -25,21 +17,18 @@ k.knn = as.integer(sqrt(nrow(train)))
 
 g = function(dataFrame) {
   solutions = dataFrame[,"DIED"]
-  data = dataFrame[,-14]
+  data = dataFrame[,-14] # 14 corresponds to row "DIED"
 
   n = nrow(dataFrame)
-  idx = createFolds(dataFrame, k = 4)
   s = 0
   preds = c()
   for (i in 1:n) {
-<<<<<<< HEAD
-    data.train = data[-idx[i], ]
-    data.test = data[idx[i], ]
-    data.results = solutions[-idx[i]]
 
-    pred = knn(train = data.train, test = data.test, cl = data.results, k = n)
-=======
-   # data.train = data[-idx[[i]], ]
+    #data.train = data[-idx[i], ]
+    #data.test = data[idx[i], ]
+    #data.results = solutions[-idx[i]]
+    #pred = knn(train = data.train, test = data.test, cl = data.results, k = n)
+    #data.train = data[-idx[[i]], ]
     #data.test = data[idx[[i]], ]
     #data.results = solutions[-idx[[i]]]
    
@@ -50,8 +39,8 @@ g = function(dataFrame) {
     pred = knn(train = data.train, test = data.test, cl = data.results, k = 3)
     preds[i] = as.logical(pred)
     if (as.logical(pred) != solutions[i]) s = s + 1
->>>>>>> 5bb82778dda33ca5ab2147cf53f187866422e6e2
-    print(pred)
+
+    #print(pred)
     #print(paste0(mean(data.test[ idx[[i]] ] != as.logical(pred))))
   }
   print(s/nrow(dataFrame))
@@ -62,9 +51,9 @@ g = function(dataFrame) {
 # To do n-fold-cross-validation
 n = nrow(thoraric)
 
-idx = createFolds(thoraric, k = n)
+#idx = createFolds(thoraric, k = n)
 
 results.train = train[,"DIED"]
 data.train = train[,-14] # 14 corresponds to row "DIED"
 
-a = knn(data.train, test, results.train, k)a
+a = knn(data.train, test, results.train, k.knn)
