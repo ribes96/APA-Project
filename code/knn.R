@@ -3,7 +3,7 @@
 knn = function(train, test, k) {
   library("class")
   #library("KODAMA")
-  
+
   #TODO
 }
 
@@ -26,14 +26,14 @@ createFolds = function(dataFrame, number) {
 g = function(dataFrame) {
   solutions = dataFrame[,"DIED"]
   data = dataFrame[,-14]
-  
+
   n = nrow(dataFrame)
   idx = createFolds(dataFrame, k = n)
   for (i in 1:n) {
     data.train = data[-idx[i], ]
     data.test = data[idx[i], ]
     data.results = solutions[-idx[i]]
-    
+
     pred = knn(train = data.train, test = data.test, cl = data.results, k = n)
     print(pred)
   }
@@ -49,4 +49,3 @@ results.train = train[,"DIED"]
 data.train = train[,-14] # 14 corresponds to row "DIED"
 
 a = knn(data.train, test, results.train, k)a
-
