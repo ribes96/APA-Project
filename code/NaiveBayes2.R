@@ -4,6 +4,7 @@
 
 
 library(caret)
+library(bnclassify)
 
 df = thoraric.removed
 
@@ -16,7 +17,7 @@ posK = c(1,2,3,5,7,10)
 df$DIED = as.factor(df$DIED)
 
 ## specify 10x10 CV
-trc <- trainControl (method="repeatedcv", number=n, repeats=10)
+trc <- trainControl (method="repeatedcv", number=10, repeats=10)
 
 ## WARNING: this takes some minutes
 model.10x10CV <- train (
