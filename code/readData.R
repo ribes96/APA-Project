@@ -3,9 +3,14 @@ library("foreign")
 #setwd("/home/hobber/git/APA-Project/dataset")
 pathAlbert = "/home/hobber/git/APA-Project/dataset/ThoraricSurgery.arff"
 pathKerstin = "path Kerstin"
+if (Sys.info()[6] == "hobber") {
+  genPath = pathAlbert
+ } else {
+  genPath = pathKerstin }
 #setwd("../dataset")
 #thoraric = read.arff("ThoraricSurgery.arff")
-thoraric = read.arff(pathAlbert)
+#thoraric = read.arff(pathAlbert)
+thoraric = read.arff(genPath)
 names(thoraric) = c(
   "DGN",
   "FVC", #Forced Vital Capacity

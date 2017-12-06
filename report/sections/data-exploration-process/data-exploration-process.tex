@@ -9,11 +9,18 @@
 Our dataset do not have missing values, so there is no need to treat them.
 \subsubsection{Treatment of anomalous values}
 \red{Quizá hay que quitar algunas personas por ser demasiado jóvenes comparadas con el resto}
+
+The age of the patients is not well distributed. Most of them are over 60 years old, and only 4 of the patients are under 40. Due to this, it is very likely that the conclusions of our study will only be applicable to the elder people. However, we are reluctant to remove the younger patients.
+
 \subsubsection{Treatment of incoherent values}
-The variable FEV1 which is the Forced Expiratory Volume in 1 second, shows a few anomalously high values. Depending on factors lika age and sex of a patient the average value of the FEV1 is around 3-6 litres, whereas the dataset shows values up to 86. As most of the values are within 0 and 10 we assume that the dataset contains the FEV1 in litres. To decide which values are to be determined as outliers we calculate the FEV1/FVC ratio which gives the percentage of the lung volume exhaled in the first second over the whole exhaled volume. All patients having a unrealistic ratio higher than 100\%, which are 22 patients, are determined to be outliers and eliminated. We chose not to apply any stricter constraints because the dataset does not include the sex of the patients which influences the normal values of the FEV1 much.
+The variable FEV1 which is the Forced Expiratory Volume in 1 second, shows a few anomalously high values. Depending on factors like age and sex of a patient the average value of the FEV1 \red{should be} is around 3-6 litres, whereas the dataset shows values up to 86. As most of the values are within 0 and 10 we assume that the dataset contains the FEV1 in litres. To decide which values are to be determined as outliers we calculate the FEV1/FVC ratio which gives the percentage of the lung volume exhaled in the first second over the whole exhaled volume. All patients having a unrealistic ratio higher than 100\%, which are 22 patients, are determined to be outliers and eliminated. We chose not to apply any stricter constraints because the dataset does not include the sex of the patients which influences the normal values of the FEV1 much.
 
 Source of knowledge about FEV1 and FVC:
 https://www.nuvoair.com/blogs/blog/do-you-know-how-to-interpret-the-results-of-your-spirometry-test
+
+\red{El enlace antiguo ha caido, ahora es este:}
+
+\red{https://www.nuvoair.com/do-you-know-how-to-interpret-the-results-of-your-spirometry-test.html}
 
 % \red{No sé si por outliers se entiende a datos que son verdad pero que son
 % raros o si son datos que no son correctos, porque se van demasiado}
