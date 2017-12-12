@@ -1,0 +1,9 @@
+1. En muchos sitios en internet separan los datos en dos conjuntos, uno de train y otro de test, pero después también hacen cross-validation con los datos de train. ¿Por qué hacen eso? ¿Acaso hacen cross-validation para encontrar los hiper-parámetros más adecuados, y después testean con los de test?
+
+2. Nosotros deberíamos hacer lo de 1)? Tenemos pocos datos, y no podemos permitirnos reducir los de train. ¿Pero entonces cómo hemos de encontrar los parámetros adecuados?
+
+3. ¿Es adecuado hacer distintos resamplings para cada uno de los algoritmos? knn, por ejemplo, es muy sensible a los unbalanced datasets, y sería conveniente hacer un bagging o parecido. Para otros métodos quizá no hace falta.
+
+4. ¿Cómo le indicamos a knn que queremos que use la distancia Manhattan, y no la euclidea?
+
+5. ¿Qué se supone que tenemos que hacer en el apartado de clustering?

@@ -112,22 +112,26 @@ quitaremos cosas}
 \subsubsection{Normalization of the variables}
 We need to normalize only our numeric variables, which are the AGE, FVC and FEV1.
 To normalize the age we will only consider cases between $0$ and $100$ years old.
-For FVC and FEV1 the maximum will correspond to $1.1K_{FVC}$ and $1.1K_{FEV1}$,
-where $K_{FVC}$ is the maximum observed FVC and $K_{FEV1}$ is the maximum
-observed FEV1.
+For FVC and FEV1 the range will correspond to the maximum and minimum observed values with a margin of 10\%.
+
+% For FVC and FEV1 the maximum will correspond to $1.1K_{FVC}$ and $1.1K_{FEV1}$,
+% where $K_{FVC}$ is the maximum observed FVC and $K_{FEV1}$ is the maximum
+% observed FEV1.
 
 
-\red{Sería posible hacer la edad más ajustada, entre el máximo y el mínimo}
+% \red{Sería posible hacer la edad más ajustada, entre el máximo y el mínimo}
 
-\red{Hablar sobre ese 1.2 (podría ser cualquier otro)}
+% \red{Hablar sobre ese 1.2 (podría ser cualquier otro)}
 
-\red{Quizá se puede usar el mismo máximo para FVC y FEV1, que sería el que
-corresponde a FVC, pues el es mayor}
+% \red{Quizá se puede usar el mismo máximo para FVC y FEV1, que sería el que
+% corresponde a FVC, pues el es mayor}
 
 \red{Si finalmente añadimos el atributo FEV1/FVC, indicar que no hace falta
 estandarizarlo puesto que ya lo está}
 
-\red{El margen solo será del 10\%}
+\red{Puesto que al final PERFORMANCE y SIZE las hemos puesto como numéricas, también las hemos normalizado. Explicarlo}
+
+% \red{El margen solo será del 10\%}
 
 % \red{Solo se pueden normalizar FVC, FEV1 y AGE. Miraremos cuales dan mejores
 % resultados}
