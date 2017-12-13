@@ -1,0 +1,14 @@
+\section{Pasos a seguir}
+
+\begin{itemize}
+    \item Dividir el dataset en un tercio de test y dos tercios de train
+    \item Generar 10 datasets usando el dataset de train, de manera que cada uno de esos 10 datasets tenga la misma cantidad de Trues y de Falses. Los True serán siempre los mismos, los False serán samples. (bootstraping)
+    \item Para cada modelo que conocemos
+    \begin{itemize}
+        \item Lo entrenaremos con cada uno de esos 10 datasets. Si el modelo necesita parámetros, probaremos distintos parámetros, y cojeremos el que vaya mejor en la mayoría de esos 10 datasets.
+        \item Ahora tenemos 10 clasificadores. Generamos un clasificador nuevo, que pregunta a cada uno de esos 10 clasificadores y decide lo que decida la mayoría
+    \end{itemize}
+    \item Ahora tenemos un clasificador para cada modelo que conocemos.
+    \item Enfrentamos a cada uno de estos modelos con los datos de test
+    \item Ponemos en el report los resultados
+\end{itemize}

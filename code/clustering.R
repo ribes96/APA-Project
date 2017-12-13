@@ -60,3 +60,4 @@ accuracy = (confMat[1,1] + confMat[2,2])/sum(confMat)
 
 confMat
 accuracy
+
