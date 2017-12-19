@@ -3,7 +3,7 @@
 # Done 5/12/2017 After Lab
 
 # TODO:
-# - 
+# -
 
 
 
@@ -30,7 +30,7 @@ summaryStats <- function (data, lev = NULL, model = NULL) {
   out <- cor/(cor + incor)
   names(out) <- c("acc")
   out
-} 
+}
 
 
 ## specify 10x10 CV

@@ -13,4 +13,3 @@ clust = function(k, df) {
 }
 
 a = clust(3,thoraric)
-

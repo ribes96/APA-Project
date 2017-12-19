@@ -39,7 +39,7 @@ rF.pT = 0
 rF.pF = 0
 for (i in 1:nrow(dat)) {
   if (dat[i,1] == 1 & dat[i,2] == 1) {
-    rT.pT = rT.pT + 1 
+    rT.pT = rT.pT + 1
   } else if (dat[i,1] == 1 & dat[i,2] == 0) {
     rT.pF = rT.pF + 1
   } else if (dat[i,1] == 0 & dat[i,2] == 1) {
@@ -60,4 +60,3 @@ accuracy = (confMat[1,1] + confMat[2,2])/sum(confMat)
 
 confMat
 accuracy
-
