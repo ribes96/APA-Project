@@ -2,4 +2,5 @@
 
 getSuper.knn = function(dflist) {
   models.list = lapply(dflist, getKNN.model)
+  return(models.list)
 }

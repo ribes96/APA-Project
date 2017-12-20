@@ -3,7 +3,7 @@
 getKNN.model = function(df) {
     df$DIED = as.factor(df$DIED)
     ## specify 10x10 CV
-    trc <- trainControl (method="repeatedcv", number=10, repeats=10)
+    trc <- trainControl (method="repeatedcv", number=5, repeats=1)
     ## WARNING: this takes some minutes
     knn.model <- train (
       DIED ~.,
