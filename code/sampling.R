@@ -11,7 +11,7 @@ getOneSubset = function(notused, data, trueI, falseI) {
 
 # para usar esto se supone que ya se ha separado en datos de test y de train
 #retorna una lista de nbags elementos, que son los bags de train
-getSample = function(df, nbags = 51) {
+getSample = function(df, nbags = 11) {
   trueIndex = which(df$DIED == TRUE)
   l = 1:nrow(df) %in% trueIndex
   alll = 1:nrow(df)

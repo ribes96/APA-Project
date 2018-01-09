@@ -25,21 +25,21 @@ evaluate_patient = function(patient_index, resList) {
   b = unlist(resOfI)
   justT = b[b == TRUE]
   ntrues = length(justT)
-  retVal = ntrues > length(results.list)/2
+  retVal = ntrues > length(resList)/2
   return(retVal)
 }
 
 
 
 # retorna un vector de TRUE o FALSE, que es el resultado de la votación de los modelos para cada paciente
-evaluateSuperModel = function(superModel, df) {
-  results.list = lapply(superModel, evaluateModel, data = df)
+evaluateSuperModel = function(superModel, dframe) {
+  results.list.patata = lapply(superModel, evaluateModel, data = dframe)
   #results.list es una lista que contiene vectores de TRUE y FALSE
   # el elemento i de la lista contiene los resultados que ha dicho el
   # primero de los modelos.
   
-  indices = 1:nrow(df)
-  r = unlist(lapply(indices, evaluate_patient, resList = results.list))
+  indices = 1:nrow(dframe)
+  r = unlist(lapply(indices, evaluate_patient, resList = results.list.patata))
   # r es el vector de resultados definitivos, uno para cada paciente
   return(r)
 }
@@ -87,30 +87,38 @@ evaluateSuperModel = function(superModel, df) {
 # 
 
 
-
+#Retorna la puntuación que obtiene el súper modelo con los datos pasados,
+# que se entiende que serán los de test
+testSuperModel = function(pred, obs) {
+  # pred = evaluateSuperModel(superModel, data)
+  # obs = data$DIED
+  dframe = data.frame(pred, obs)
+  score = f1(dframe)
+  return(score)
+}
 
 
 # superModel es una lista de modelos
-testSuperModel = function(superModel, testData) {
-  test_results = evaluateSuperModel(superModel, testData)
-  real_results = testData$DIED
-  
-  ands = test_results & real_results
-  just.ands = ands[ands == T]
-  rTpT = length(just.ands)
-  
-  just.real.T = real_results[real_results == TRUE]
-  rT = length(just.real.T)
-  
-  just.pred.T = test_results[test_results == T]
-  pT = length(just.pred.T)
-  
-  prec = rTpT / pT
-  recall = rTpT / rT
-  
-  f1 = 2*prec*recall/(prec + recall)
-  
-}
+# testSuperModel = function(superModel, testData) {
+#   test_results = evaluateSuperModel(superModel, testData)
+#   real_results = testData$DIED
+#   
+#   ands = test_results & real_results
+#   just.ands = ands[ands == T]
+#   rTpT = length(just.ands)
+#   
+#   just.real.T = real_results[real_results == TRUE]
+#   rT = length(just.real.T)
+#   
+#   just.pred.T = test_results[test_results == T]
+#   pT = length(just.pred.T)
+#   
+#   prec = rTpT / pT
+#   recall = rTpT / rT
+#   
+#   f1 = 2*prec*recall/(prec + recall)
+#   
+# }
 
 #f = function(df, Testprop = 1/3) {
 #  testIndex = sample(1:nrow(df), floor(TestProp*nrow(df)))
