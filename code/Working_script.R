@@ -11,9 +11,9 @@ test_data = gg$test
 train_data = gg$train #train_data es una lista de dataframes
 
 #Generar los super modelos
-super.knn.model = getSuper.knn(train_data)
-super.glm.model = getSuper.glm(train_data)
-super.NB.model = getSuper.NB(train_data)
+# super.knn.model = getSuper.knn(train_data)
+# super.glm.model = getSuper.glm(train_data)
+# super.NB.model = getSuper.NB(train_data)
 
 # results.list = lapply(super.knn.model, evaluateModel, data = test_data)
 

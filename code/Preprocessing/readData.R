@@ -2,7 +2,7 @@ library("foreign")
 # Solo para Albert
 #setwd("/home/hobber/git/APA-Project/dataset")
 pathAlbert = "/home/hobber/git/APA-Project/dataset/ThoraricSurgery.arff"
-pathKerstin = "C:/Users/Kerstin/Documents/Studium/Inhalte/05_APA_Machine Learning (Lluís)/Project/dataset/ThoraricSurgery.arff"
+pathKerstin = "C:/Users/Kerstin/Documents/Studium/Inhalte/05_APA_Machine Learning (Llus)/Project/dataset/ThoraricSurgery.arff"
 if (Sys.info()[6] == "hobber") {
   genPath = pathAlbert
  } else {
