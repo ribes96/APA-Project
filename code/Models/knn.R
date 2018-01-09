@@ -1,9 +1,18 @@
 
 
+
+
+
+
 getKNN.model = function(df) {
     df$DIED = as.factor(df$DIED)
     ## specify 10x10 CV
-    trc <- trainControl (method="repeatedcv", number=5, repeats=1)
+    # trc <- trainControl (
+    #   method="repeatedcv",
+    #   number=5,
+    #   repeats=1,
+    #   summaryFunction = f1
+    #   )
     ## WARNING: this takes some minutes
     knn.model <- train (
       DIED ~.,

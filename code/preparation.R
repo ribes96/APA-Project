@@ -1,3 +1,6 @@
+#Funciones para evaluar los modelos
+
+
 
 library(caret)
 library(ROCR)
@@ -26,6 +29,8 @@ evaluate_patient = function(patient_index, resList) {
   return(retVal)
 }
 
+
+
 # retorna un vector de TRUE o FALSE, que es el resultado de la votación de los modelos para cada paciente
 evaluateSuperModel = function(superModel, df) {
   results.list = lapply(superModel, evaluateModel, data = df)
@@ -39,51 +44,47 @@ evaluateSuperModel = function(superModel, df) {
   return(r)
 }
 
-f1 = function(data, lev = NULL, model = NULL) {
-  predicted = data$pred
-  real = data$obs
-  bothFalse = !predicted & !real
-  just.both.false = bothFalse[bothFalse == T]
-  rFpF = length(just.both.false)
-  
-  just.real.false = real[real == FALSE]
-  rF = length(just.real.false)
-  
-  just.pred.false = predicted[predicted == FALSE]
-  pF = length(just.pred.false)
-  
-  prec = rFpF / pF
-  recall = rFpF / rF
-  
-  metric = 2*prec*recall/(prec + recall)
-  out = metric
-  names(out) = "MAE"
-  out
-}
-f2 = function(data, lev = NULL, model = NULL) {
-  out = 4
-  names(out) = "MAE"
-}
+# f1 = function(data, lev = NULL, model = NULL) {
+#   predicted = data$pred
+#   real = data$obs
+#   bothFalse = !predicted & !real
+#   just.both.false = bothFalse[bothFalse == T]
+#   rFpF = length(just.both.false)
+#   
+#   just.real.false = real[real == FALSE]
+#   rF = length(just.real.false)
+#   
+#   just.pred.false = predicted[predicted == FALSE]
+#   pF = length(just.pred.false)
+#   
+#   prec = rFpF / pF
+#   recall = rFpF / rF
+#   
+#   metric = 2*prec*recall/(prec + recall)
+#   out = metric
+#   names(out) = "MAE"
+#   out
+# }
 
 
 
-getKNN.model = function(df) {
-  df$DIED = as.factor(df$DIED)
-  ## specify 10x10 CV
-  trc <- trainControl (method="repeatedcv", number=5, repeats=1, summaryFunction = f2)
-  ## WARNING: this takes some minutes
-  knn.model <- train (
-    DIED ~.,
-    data = df,
-    method='knn',
-    #TODO poner la métrica F1 score
-    metric = "MAE",
-    #tuneGrid = expand.grid(.k = posK),
-    trControl=trc)
-  
-  return(knn.model)
-
-
+# getKNN.model = function(df) {
+#   df$DIED = as.factor(df$DIED)
+#   ## specify 10x10 CV
+#   trc <- trainControl (method="repeatedcv", number=5, repeats=1, summaryFunction = f2)
+#   ## WARNING: this takes some minutes
+#   knn.model <- train (
+#     DIED ~.,
+#     data = df,
+#     method='knn',
+#     #TODO poner la métrica F1 score
+#     metric = "MAE",
+#     #tuneGrid = expand.grid(.k = posK),
+#     trControl=trc)
+#   
+#   return(knn.model)
+# }
+# 
 
 
 
@@ -133,7 +134,33 @@ generalSample = function(df, TestProp = 1/3) {
   return(retList)
 }
 
-gg = generalSample(thoraric.removed)
+f1 = function(data, lev = NULL, model = NULL) {
+  predicted = data$pred
+  real = data$obs
+  bothFalse = !predicted & !real
+  just.both.false = bothFalse[bothFalse == T]
+  rFpF = length(just.both.false)
+  
+  just.real.false = real[real == FALSE]
+  rF = length(just.real.false)
+  
+  just.pred.false = predicted[predicted == FALSE]
+  pF = length(just.pred.false)
+  
+  prec = rFpF / pF
+  recall = rFpF / rF
+  
+  metric = 2*prec*recall/(prec + recall)
+  out = metric
+  names(out) = c("F1")
+  out
+}
 
-bags = gg$train
-test = gg$test
+# Se usa el mismo trainControl para todos los modelos
+# TODO poner repeats = 10
+trc <- trainControl (
+  method="repeatedcv",
+  number=5,
+  repeats=1,
+  summaryFunction = f1
+)
