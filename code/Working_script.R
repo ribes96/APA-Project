@@ -38,6 +38,7 @@ GLM.Result = function(train_data, test_data) {
   return(r)
 }
 
+glm.res = GLM.Result(train_data, test_data)
 
 
 # library(mlr)

@@ -2,10 +2,8 @@
 
 getGLM.model = function(df) {
     ## specify 10x10 CV
-
+    df$DIED = as.factor(df$DIED)
     #trc <- trainControl (method="repeatedcv", number=10, repeats=10)
-
-
     ## WARNING: this takes some minutes
     glm.model <- train (
       DIED ~.,
@@ -19,7 +17,8 @@ getGLM.model = function(df) {
       #tuneGrid = expand.grid(.k = posK),
       trControl=trc)
 
-      return(glm.model)
+      
+    return(glm.model)
 }
 
 # Recibe una lista de dataframes que ya están balanceados, y retorna una lista de modelos knn, que tiene el mismo tamaño que la lista de entrada
