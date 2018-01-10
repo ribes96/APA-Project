@@ -1,15 +1,9 @@
-#Funciones para evaluar los modelos
-
-
+#Funciones para evaluar los modelos y calcular resultados
 
 library(caret)
 library(ROCR)
 
 # Recibe un dataframe terminado de preprocesar y a proporción que se quiere usar para train y test, y...
-
-#superModel es una lista de modelos
-# instance es uno de los pacientes
-
 #retorna un vector de TRUE y FALSE, uno para cada paciente de data
 evaluateModel = function(model, data) {
   result = predict(model, newdata = data)
@@ -21,7 +15,7 @@ evaluateModel = function(model, data) {
 evaluate_patient = function(patient_index, resList) {
   resOfI = lapply(resList, function(l) l[[patient_index]])
   #resOfI contiene todos los resultados predichos para el paciente i
-  
+
   b = unlist(resOfI)
   justT = b[b == TRUE]
   ntrues = length(justT)
@@ -37,54 +31,12 @@ evaluateSuperModel = function(superModel, dframe) {
   #results.list es una lista que contiene vectores de TRUE y FALSE
   # el elemento i de la lista contiene los resultados que ha dicho el
   # primero de los modelos.
-  
+
   indices = 1:nrow(dframe)
   r = unlist(lapply(indices, evaluate_patient, resList = results.list.patata))
   # r es el vector de resultados definitivos, uno para cada paciente
   return(r)
 }
-
-# f1 = function(data, lev = NULL, model = NULL) {
-#   predicted = data$pred
-#   real = data$obs
-#   bothFalse = !predicted & !real
-#   just.both.false = bothFalse[bothFalse == T]
-#   rFpF = length(just.both.false)
-#   
-#   just.real.false = real[real == FALSE]
-#   rF = length(just.real.false)
-#   
-#   just.pred.false = predicted[predicted == FALSE]
-#   pF = length(just.pred.false)
-#   
-#   prec = rFpF / pF
-#   recall = rFpF / rF
-#   
-#   metric = 2*prec*recall/(prec + recall)
-#   out = metric
-#   names(out) = "MAE"
-#   out
-# }
-
-
-
-# getKNN.model = function(df) {
-#   df$DIED = as.factor(df$DIED)
-#   ## specify 10x10 CV
-#   trc <- trainControl (method="repeatedcv", number=5, repeats=1, summaryFunction = f2)
-#   ## WARNING: this takes some minutes
-#   knn.model <- train (
-#     DIED ~.,
-#     data = df,
-#     method='knn',
-#     #TODO poner la métrica F1 score
-#     metric = "MAE",
-#     #tuneGrid = expand.grid(.k = posK),
-#     trControl=trc)
-#   
-#   return(knn.model)
-# }
-# 
 
 
 #Retorna la puntuación que obtiene el súper modelo con los datos pasados,
@@ -98,43 +50,12 @@ testSuperModel = function(pred, obs) {
 }
 
 
-# superModel es una lista de modelos
-# testSuperModel = function(superModel, testData) {
-#   test_results = evaluateSuperModel(superModel, testData)
-#   real_results = testData$DIED
-#   
-#   ands = test_results & real_results
-#   just.ands = ands[ands == T]
-#   rTpT = length(just.ands)
-#   
-#   just.real.T = real_results[real_results == TRUE]
-#   rT = length(just.real.T)
-#   
-#   just.pred.T = test_results[test_results == T]
-#   pT = length(just.pred.T)
-#   
-#   prec = rTpT / pT
-#   recall = rTpT / rT
-#   
-#   f1 = 2*prec*recall/(prec + recall)
-#   
-# }
-
-#f = function(df, Testprop = 1/3) {
-#  testIndex = sample(1:nrow(df), floor(TestProp*nrow(df)))
-#  df.test = df[testIndex,]
-#  df.train = df[-testIndex,]
-#  
-#  trainSample = getSample(df.train)
-#  superKNN = getSuper.knn(trainSample)
-#}
-
 #Recibe un dataframe que ya ha pasado el preprocesado, y retorna una lista con el dataframe de test y con todos los bags de training
 generalSample = function(df, TestProp = 1/3) {
   testIndex = sample(1:nrow(df), floor(TestProp*nrow(df)))
   df.test = df[testIndex,]
   df.train = df[-testIndex,]
-  
+
   trainSample = getSample(df.train)
   retList = list(trainSample, df.test)
   retList = setNames(retList, c("train","test"))
@@ -142,6 +63,9 @@ generalSample = function(df, TestProp = 1/3) {
   return(retList)
 }
 
+setWeight = function(w = 1){
+  weight <<- w
+}
 
 f1 = function(data, lev = NULL, model = NULL) {
   predicted = data$pred
@@ -149,17 +73,17 @@ f1 = function(data, lev = NULL, model = NULL) {
   bothFalse = !predicted & !real
   just.both.false = bothFalse[bothFalse == T]
   rFpF = length(just.both.false)
-  
+
   just.real.false = real[real == FALSE]
   rF = length(just.real.false)
-  
+
   just.pred.false = predicted[predicted == FALSE]
   pF = length(just.pred.false)
-  
+
   prec = rFpF / pF
   recall = rFpF / rF
-  
-  metric = 2*prec*recall/(prec + recall)
+
+  metric = 2 * (weight^2) * prec * recall/((weight^2) * prec + recall)
   out = metric
   names(out) = c("F1")
   out
@@ -173,3 +97,36 @@ trc <- trainControl (
   repeats=1,
   summaryFunction = f1
 )
+
+
+#Calcula todos los resultados y retorna un dataframe con estos
+getResults = function(){
+  knn.res.orig = KNN.Result(train_data.orig, test_data.orig)
+  nb.res.orig = NB.Result(train_data.orig, test_data.orig)
+  glm.res.orig = GLM.Result(train_data.orig, test_data.orig)
+  rn.res.orig = RN.Result(train_data.orig, test_data.orig)
+  rf.res.orig = RF.Result(train_data.orig, test_data.orig)
+
+  knn.res.rem = KNN.Result(train_data.rem, test_data.rem)
+  nb.res.rem = NB.Result(train_data.rem, test_data.rem)
+  glm.res.rem = GLM.Result(train_data.rem, test_data.rem)
+  rn.res.rem = RN.Result(train_data.rem, test_data.rem)
+  rf.res.rem = RF.Result(train_data.rem, test_data.rem)
+
+  #F1 score con todo false
+  # n = length(thoraric.original$DIED)
+  # false = rep(FALSE, n)
+  # d = thoraric.original$DIED
+  # allF = matrix(c(false, d), ncol = 2)
+  # colnames(allF) = c("pred", "obs")
+  # allFalse.orig = f1(data.frame(allF))
+
+  results = matrix(c(knn.res.orig, nb.res.orig, glm.res.orig, rn.res.orig, rf.res.orig,
+                     knn.res.rem, nb.res.rem, glm.res.rem, rn.res.rem, rf.res.rem),
+                   ncol = 2)
+  rownames(results) = c("K-nearest neighbours", "Naive Bayes", "Linear Model",
+                        "Neural Net", "Random Forest")
+  colnames(results) = c("Original", "Removed")
+  r = data.frame(results)
+  return(r)
+}

@@ -1,20 +1,22 @@
-#Entrena una red neuronal
+library(randomForest)
 
-getRN.model = function(df) {
+#Entrena una random forest
+
+getRF.model = function(df) {
   df$DIED = as.factor(df$DIED)
   
   ## WARNING: this takes some minutes
-  rn.model <- train (
+  rf.model <- train (
     DIED ~.,
     data = df,
-    method='nnet',
+    method='rf',
     trControl=trc)
   
-  return(rn.model)
+  return(rf.model)
 }
 
 # Recibe una lista de dataframes que ya están balanceados, y retorna una lista de modelos knn, que tiene el mismo tamaño que la lista de entrada
-getSuper.rn = function(dflist) {
-  models.list = lapply(dflist, getRN.model)
+getSuper.rf = function(dflist) {
+  models.list = lapply(dflist, getRF.model)
   return(models.list)
 }

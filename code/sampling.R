@@ -34,3 +34,16 @@ generalSample = function(df, TestProp = 1/3) {
   #superKNN = getSuper.knn(trainSample)
   return(retList)
 }
+
+#Generar samples de train y test
+#train_data es una lista de dataframes
+getSamples = function(df_orig, df_rem){
+  sample.rem <<- generalSample(df_rem)
+  test_data.rem <<- sample.rem$test
+  train_data.rem <<- sample.rem$train 
+  
+  sample.orig <<- generalSample(df_orig)
+  test_data.orig <<- sample.orig$test
+  train_data.orig <<- sample.orig$train 
+  
+}
