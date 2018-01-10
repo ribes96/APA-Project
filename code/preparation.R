@@ -142,6 +142,7 @@ generalSample = function(df, TestProp = 1/3) {
   return(retList)
 }
 
+
 f1 = function(data, lev = NULL, model = NULL) {
   predicted = data$pred
   real = data$obs

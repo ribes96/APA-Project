@@ -8,12 +8,12 @@
 \subsubsection{Treatment of missing values}
 Our dataset do not have missing values, so there is no need to treat them.
 \subsubsection{Treatment of anomalous values}
-\red{Quizá hay que quitar algunas personas por ser demasiado jóvenes comparadas con el resto}
+% \red{Quizá hay que quitar algunas personas por ser demasiado jóvenes comparadas con el resto}
 
 The age of the patients is not well distributed. Most of them are over 60 years old, and only 4 of the patients are under 40. Due to this, it is very likely that the conclusions of our study will only be applicable to the elder people. However, we are reluctant to remove the younger patients.
 
-\subsubsection{Treatment of incoherent values}
-The variable FEV1 which is the Forced Expiratory Volume in 1 second, shows a few anomalously high values. Depending on factors like age and sex of a patient the average value of the FEV1 \red{should be} is around 3-6 litres, whereas the dataset shows values up to 86. As most of the values are within 0 and 10 we assume that the dataset contains the FEV1 in litres. To decide which values are to be determined as outliers we calculate the FEV1/FVC ratio which gives the percentage of the lung volume exhaled in the first second over the whole exhaled volume. All patients having a unrealistic ratio higher than 100\%, which are 22 patients, are determined to be outliers and eliminated. We chose not to apply any stricter constraints because the dataset does not include the sex of the patients which influences the normal values of the FEV1 much.
+\subsubsection{Treatment of incoherent values} \label{sec-inco-val}
+The variable FEV1 which is the Forced Expiratory Volume in 1 second, shows a few anomalously high values. Depending on factors like age and sex of a patient the average value of the FEV1 should be around 3-6 litres, whereas the dataset shows values up to 86. As most of the values are within 0 and 10 we assume that the dataset contains the FEV1 in litres. To decide which values are to be determined as outliers we calculate the FEV1/FVC ratio which gives the percentage of the lung volume exhaled in the first second over the whole exhaled volume. All patients having a unrealistic ratio higher than 100\%, which are 22 patients, are determined to be outliers and eliminated. We chose not to apply any stricter constraints because the dataset does not include the sex of the patients which influences the normal values of the FEV1 much.
 
 Source of knowledge about FEV1 and FVC:
 https://www.nuvoair.com/blogs/blog/do-you-know-how-to-interpret-the-results-of-your-spirometry-test
@@ -45,14 +45,14 @@ https://www.nuvoair.com/blogs/blog/do-you-know-how-to-interpret-the-results-of-y
 % \todo[inline]{El código que convierta nuestras variables categóricas en tiras
 % de 0s y 1s}
 
-\red{La mayoría de variables son binarias, y establecemos su tipo en "binary"}
-
-\red{Las variables "PERFORMANCE" Y "SIZE" sí que tienen un orden, por lo tanto
-las definimos como numeric (integer)}
-
-\red{AGE se queda como está, numeric}
-
-\red{Tanto PERFORMANCE como SIZE como AGE se normalizarán}
+% \red{La mayoría de variables son binarias, y establecemos su tipo en "binary"}
+%
+% \red{Las variables "PERFORMANCE" Y "SIZE" sí que tienen un orden, por lo tanto
+% las definimos como numeric (integer)}
+%
+% \red{AGE se queda como está, numeric}
+%
+% \red{Tanto PERFORMANCE como SIZE como AGE se normalizarán}
 
 As most of the dataset variables are logical, we have coded them as logical in R. We have converted the variable ``DGN'' to many binary variables, each one saying wether the patient showed that diagnosis or not.
 
@@ -73,14 +73,18 @@ Some of the variables of our dataset are not well represented. In particular:
   \hline
   \textbf{ASHTMA} & Just 2 patients have ASHTMA = True \\
   \hline
+  \textbf{MI} & Just 2 patients have MI = True \\
+  \hline
 \end{tabular}
 \end{center}
 
-Hence the normal thing to do would be to eliminate those columns in our dataset,
-since they do not provide good information. However, as we have very few instances
-we can afford to try out keeping and removing them. We will run our models with
-each of the 16 combinations of keeping DGN1, DGN8, PAD and ASHTMA and we will
-see which one works better.
+As we have very few instances we will train and run the models on two different datasets. One of them, thoraric.original, will contain all of the original attributes, and the other , thoraric.removed, will contain all attributes but  ``DGN.1'', ``DGN.8'',``PAD'',``ASHTMA'' and ``MI''.
+
+% Hence the normal thing to do would be to eliminate those columns in our dataset,
+% since they do not provide good information. However, as we have very few instances
+% we can afford to try out keeping and removing them. We will run our models with
+% each of the 16 combinations of keeping DGN1, DGN8, PAD and ASHTMA and we will
+% see which one works better.
 
 % \todo[inline]{Redactar bien esta parte, indicando que puesto que tenemos pocos
 % datos, podemos permitirnos hacer varias ejecuciones, y que probaremos cada
@@ -99,18 +103,21 @@ see which one works better.
 %   \item Solo 2 pacientes tienen ASHTMA == True
 % \end{itemize}
 
-\red{Mirar si podemos agrupar varios DGN que se parezcan (preguntar a alguien que sepa)}
+% \red{Mirar si podemos agrupar varios DGN que se parezcan (preguntar a alguien que sepa)}
 
-\red{Haremos 2 datasets, uno que sea el original sin quitar nada, otro en el que
-quitaremos cosas}
+% \red{Haremos 2 datasets, uno que sea el original sin quitar nada, otro en el que
+% quitaremos cosas}
 
-\red{Seguro que quitamos DGN1, DGN8, MI,  y ASTHMA}
+% \red{Seguro que quitamos DGN1, DGN8, MI,  y ASTHMA}
 \subsubsection{Creation of new useful variables (Feature extraction)}
-\red{Entender cómo funciona MCA, y ver si podemos sacar una variable nueva}
 
-\red{Quizá es interesante añadir la variable FEV/FEV1}
+We have not created any new variable as most of the ones we have are logical and it doesn't seem to be any relation among them.
+
+% \red{Entender cómo funciona MCA, y ver si podemos sacar una variable nueva}
+
+% \red{Quizá es interesante añadir la variable FEV/FEV1}
 \subsubsection{Normalization of the variables}
-We need to normalize only our numeric variables, which are the AGE, FVC and FEV1.
+We need to normalize only our numeric variables, which are the AGE, FVC and FEV1. As we have converted the variables ``PERFORMANCE'' and ``SIZE'' to numeric (as we will see in section \ref{sec-var-trans}) we also need to normalize them.
 To normalize the age we will only consider cases between $0$ and $100$ years old.
 For FVC and FEV1 the range will correspond to the maximum and minimum observed values with a margin of 10\%.
 
@@ -126,36 +133,36 @@ For FVC and FEV1 the range will correspond to the maximum and minimum observed v
 % \red{Quizá se puede usar el mismo máximo para FVC y FEV1, que sería el que
 % corresponde a FVC, pues el es mayor}
 
-\red{Si finalmente añadimos el atributo FEV1/FVC, indicar que no hace falta
-estandarizarlo puesto que ya lo está}
+% \red{Si finalmente añadimos el atributo FEV1/FVC, indicar que no hace falta
+% estandarizarlo puesto que ya lo está}
 
-\red{Puesto que al final PERFORMANCE y SIZE las hemos puesto como numéricas, también las hemos normalizado. Explicarlo}
+% \red{Puesto que al final PERFORMANCE y SIZE las hemos puesto como numéricas, también las hemos normalizado. Explicarlo}
 
 % \red{El margen solo será del 10\%}
 
 % \red{Solo se pueden normalizar FVC, FEV1 y AGE. Miraremos cuales dan mejores
 % resultados}
-\subsubsection{Transformation of the variables}
+\subsubsection{Transformation of the variables} \label{sec-var-trans}
 Acording to \red{the paper we found} the accetable range for skewness in a numeric
-variable is $(-2, +2)$. The skewness of our original variables AGE, FVC and FEV are:
+variable is $(-2, +2)$. In the original dataset, the one which contained all the patients, the skewness of variables AGE, FVC and FEV were out of this range. But after eliminating $22$ of the patients (in \ref{sec-inco-val}) all of them are inside the acceptable range, so there's no need to transform them.
 
-\begin{center}
-\begin{tabular}{| c | c |}
-  \hline
-  AGE & -0.1899413 \\
-  FVC & 0.5417132 \\
-  FEV1 & 5.597584 \\
-  \hline
-\end{tabular}
-\end{center}
+% \begin{center}
+% \begin{tabular}{| c | c |}
+%   \hline
+%   AGE & -0.1899413 \\
+%   FVC & 0.5417132 \\
+%   FEV1 & 5.597584 \\
+%   \hline
+% \end{tabular}
+% \end{center}
+%
+% But we have to take into account that we've eliminated \red{22} patients, so the
+% new values are:
+%
+% \todo[inline]{Poner los nuevos valores}
 
-But we have to take into account that we've eliminated \red{22} patients, so the
-new values are:
-
-\todo[inline]{Poner los nuevos valores}
-
-As the three variables are in the specified range, there is no need of
-transforming them.
+% As the three variables are in the specified range, there is no need of
+% transforming them.
 
 % \red{Skewness es la asimetría de los datos respecto a la media.}
 % \red{Como la mayoría de nuestras variables son categóricas, no tiene mucho
@@ -170,7 +177,7 @@ transforming them.
 % o inferirlos) y miraremos el skewness de esos nuevos datos. (suponemos que entonces
 % sí que estarán en ese rango, y por tanto no habrá que aplicar la transformación)}
 
-\red{Referenciar (y leer un poco...) el paper}
+% \red{Referenciar (y leer un poco...) el paper}
 
 
 %https://www.researchgate.net/publication/281345819_The_Research_Methods_Knowledge_Base

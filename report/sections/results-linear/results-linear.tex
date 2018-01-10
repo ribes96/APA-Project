@@ -15,7 +15,15 @@
 
 
 \subsection{Naive Bayes}
-\todo[inline]{Buscar la biblioteca que lo calcula y aplicarlo a nuestros datos}
+% \todo[inline]{Buscar la biblioteca que lo calcula y aplicarlo a nuestros datos}
+\red{
+\begin{itemize}
+    \item Comentar las decisiones que se han tomado (cuidado con los valores por defecto). p.e: Por qué hemos usado distancia Manhatan en vez de Euclidea en knn
+    \item Comentar los hiperparámetros que se han obtenido por crossvalidation. Como no vamos a hablar de cada uno de los modelos (51), hablar de la media de todos ellos, o algo así
+     \item Comentar los resultados que se ha obtenido. Intentar ver por qué ha ido bien o mal, y cosas así
+     \item Poner la confussion matrix
+\end{itemize}
+}
 \subsection{KNN}
 
 \red{Si no hacemos nada para desbalancear los datos, hay que usar una k muy pequeña}
@@ -23,15 +31,15 @@
 \red{Quizá es recomendable usar algún método para balancear los datos, y probar así otros valores de k}
 
 
-\subsection{LDA}
-% \red{Usar LDA para tener 2 centroides, que son los de cada una de las clases.
-% Cuando evaluamos un dato nuevo, le aplicamos la transformación y miramos si queda más cerca de uno o de otro.
-% Así podemos ver la probabilidad de que pertenezca a cada una de las clases.}
-\red{Suponiendo que las varianzas de cada una de las clases son la misma, se
-usa este algoritmo, (que simplifica QLA) para ver la probabilidad de pertenencia
-a una clase}
-\subsection{QDA}
-\subsection{RDA}
+% \subsection{LDA}
+% % \red{Usar LDA para tener 2 centroides, que son los de cada una de las clases.
+% % Cuando evaluamos un dato nuevo, le aplicamos la transformación y miramos si queda más cerca de uno o de otro.
+% % Así podemos ver la probabilidad de que pertenezca a cada una de las clases.}
+% \red{Suponiendo que las varianzas de cada una de las clases son la misma, se
+% usa este algoritmo, (que simplifica QLA) para ver la probabilidad de pertenencia
+% a una clase}
+% \subsection{QDA}
+% \subsection{RDA}
 
 \subsection{Logistic Regression}
 
@@ -41,7 +49,7 @@ a una clase}
 
 \red{Mirar el vecino más cercano para precedir}
 
-\red{Si suponemos que las variables son independientes:
--Haces naive Bayes para ver la probabilidad de que pertenezca a cada una de las clases
-(habría que estudiar si las variables son independientes)
-- Logistic regression}
+% \red{Si suponemos que las variables son independientes:
+% -Haces naive Bayes para ver la probabilidad de que pertenezca a cada una de las clases
+% (habría que estudiar si las variables son independientes)
+% - Logistic regression}
