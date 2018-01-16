@@ -21,6 +21,8 @@
 \end{itemize}
 }
 
+Random forests build decision trees using bagging to get different samples and combinations of variables to train on, and classify given test data by majority vote of all decision trees. This method is said to be quite robust even to imbalanced data, but does not create bags with equal parts of both classes, so we chose to call the random forest method with our preprocessed data. As the already balanced train samples are then divided into bags the models should give a more or less good result in the testing phase. Although it is possible to define the depth of trees and number of variables to choose we did not set these parameters fixed, because after trying different combinations there was none to create results clearly superior to the others.
+
 \subsection{Neural Network}
 
 \red{
@@ -35,3 +37,5 @@
     \item Comentar por qué creemos que los resultados han sido buenos o malos
 \end{itemize}
 }
+
+Neural networks make use of the biological system of neurons nesting functions into each other to classify the given input data. In our case we used a single-hidden-layer neural network. We did not allow skipping becauses a test with the skipping option set did not improve the results. We neither set a regularization parameter because this also let to poorer results when testing new data on the calculated models.

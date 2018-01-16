@@ -8,8 +8,8 @@ KNN.Result = function(train_data, test_data) {
   )
   r = testSuperModel(predictions, test_data$DIED)
   conf = confusionMatrix(predictions, test_data$DIED)
-  dat = list(r, conf)
-  names(dat) = c("Score", "ConfMatrix")
+  dat = list(r, conf, super.knn.model)
+  names(dat) = c("Score", "ConfMatrix", "SuperModel")
   return(dat)
 }
 
@@ -21,8 +21,8 @@ NB.Result = function(train_data, test_data) {
   )
   r = testSuperModel(predictions, test_data$DIED)
   conf = confusionMatrix(predictions, test_data$DIED)
-  dat = list(r, conf)
-  names(dat) = c("Score", "ConfMatrix")
+  dat = list(r, conf, super.nb.model)
+  names(dat) = c("Score", "ConfMatrix", "SuperModel")
   return(dat)
 }
 
@@ -34,8 +34,8 @@ GLM.Result = function(train_data, test_data) {
   )
   r = testSuperModel(predictions, test_data$DIED)
   conf = confusionMatrix(predictions, test_data$DIED)
-  dat = list(r, conf)
-  names(dat) = c("Score", "ConfMatrix")
+  dat = list(r, conf, super.glm.model)
+  names(dat) = c("Score", "ConfMatrix", "SuperModel")
   return(dat)
 }
 
@@ -47,8 +47,8 @@ RN.Result = function(train_data, test_data) {
   )
   r = testSuperModel(predictions, test_data$DIED)
   conf = confusionMatrix(predictions, test_data$DIED)
-  dat = list(r, conf)
-  names(dat) = c("Score", "ConfMatrix")
+  dat = list(r, conf, super.rn.model)
+  names(dat) = c("Score", "ConfMatrix", "SuperModel")
   return(dat)
 }
 
@@ -60,7 +60,7 @@ RF.Result = function(train_data, test_data) {
   )
   r = testSuperModel(predictions, test_data$DIED)
   conf = confusionMatrix(predictions, test_data$DIED)
-  dat = list(r, conf)
-  names(dat) = c("Score", "ConfMatrix")
+  dat = list(r, conf, super.rf.model)
+  names(dat) = c("Score", "ConfMatrix", "SuperModel")
   return(dat)
 }
