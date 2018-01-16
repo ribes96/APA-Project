@@ -21,6 +21,5 @@ getRF.model = function(df) {
 #retorna una lista de modelos random forest, que tiene el mismo tamaño que la lista de entrada
 getSuper.rf = function(dflist) {
   models.list = lapply(dflist, getRF.model)
-  super.RF <<- models.list
   return(models.list)
 }
