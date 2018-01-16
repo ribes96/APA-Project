@@ -16,19 +16,49 @@
 
 \subsection{Naive Bayes}
 % \todo[inline]{Buscar la biblioteca que lo calcula y aplicarlo a nuestros datos}
+
+Naive Bayes Algorithm has the advantage that it doesn't distinguish between types of data, and it doesn't perform any implicit transformation. The typical disadvantadge of this method is that it assumes independence on the atributes of the data.
+
+In our case,
+
 \red{
 \begin{itemize}
-    \item Comentar las decisiones que se han tomado (cuidado con los valores por defecto). p.e: Por qué hemos usado distancia Manhatan en vez de Euclidea en knn
-    \item Comentar los hiperparámetros que se han obtenido por crossvalidation. Como no vamos a hablar de cada uno de los modelos (51), hablar de la media de todos ellos, o algo así
-     \item Comentar los resultados que se ha obtenido. Intentar ver por qué ha ido bien o mal, y cosas así
-     \item Poner la confussion matrix
+    \item Puede ser adecuado porque admite tipos de datos distintos sin ningún problema
+    \item No necesita ningún hiperparámetro
+    \item Puede ser más sensible a haber quitado algunos atributos, pues afecta a la suposición Naive de independencia
+    \item Mostrar la confussion matrix
+    \item Comentar si muestra buenos o malos resutlados
+    \item Comentar diferencias entre cada uno de los dos dataset, y explicar porq qué
+    \item Identificar por qué suponemos que los resultados son buenos o malos.
 \end{itemize}
 }
+
+% \red{
+% \begin{itemize}
+%     \item Comentar las decisiones que se han tomado (cuidado con los valores por defecto). p.e: Por qué hemos usado distancia Manhatan en vez de Euclidea en knn
+%     \item Comentar los hiperparámetros que se han obtenido por crossvalidation. Como no vamos a hablar de cada uno de los modelos (51), hablar de la media de todos ellos, o algo así
+%      \item Comentar los resultados que se ha obtenido. Intentar ver por qué ha ido bien o mal, y cosas así
+%      \item Poner la confussion matrix
+% \end{itemize}
+% }
 \subsection{KNN}
 
-\red{Si no hacemos nada para desbalancear los datos, hay que usar una k muy pequeña}
+\red{
+\begin{itemize}
+    \item Por qué decidimos usar distancia manhattan en vez de euclidea
+    \item Ver, en promedio, cuantos vecinos se han considerado
+    \item Comentar que nosotros ya hemos normalizado los datos y que hemos puesto de forma adecuada las variables categóricas
+    \item Qué podría afectar a este modelo y cómo nos afectará a nosotros.
+    \item Mostrar los resultado y la confussion matrix
+    \item Comentar los resultados
+    \item Comentar las diferencias entre cada uno de los dos datasets
+    \item Comentar por qué creemos que los resultados han sido buenos o malos
+\end{itemize}
+}
 
-\red{Quizá es recomendable usar algún método para balancear los datos, y probar así otros valores de k}
+% \red{Si no hacemos nada para desbalancear los datos, hay que usar una k muy pequeña}
+
+% \red{Quizá es recomendable usar algún método para balancear los datos, y probar así otros valores de k}
 
 
 % \subsection{LDA}
@@ -41,13 +71,27 @@
 % \subsection{QDA}
 % \subsection{RDA}
 
-\subsection{Logistic Regression}
+\subsection{General Linear Model}
+
+\red{
+\begin{itemize}
+    \item Los datos se considera todos como reales, y no entiende de booleanos o categóricas
+    \item No hemos usado funciones de base especiales, solamente la identidad con cada uno de los atributos.
+    \item Ver en promedio cual ha sido la regularización
+    \item Qué puede afectar a este modelo y cómo nos va a afectar a nosotros
+    \item Mostrar los resultados y la confussion matrix
+    \item Comentar los resultados
+    \item Cometnar las diferencias entre cada uno de los datasets
+    \item Comentar por qué creemos que los resultados han sido buenos o malos
+\end{itemize}
+}
 
 
 
 
 
-\red{Mirar el vecino más cercano para precedir}
+
+% \red{Mirar el vecino más cercano para precedir}
 
 % \red{Si suponemos que las variables son independientes:
 % -Haces naive Bayes para ver la probabilidad de que pertenezca a cada una de las clases
