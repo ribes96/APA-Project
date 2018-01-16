@@ -1,4 +1,4 @@
-#normalización de variables
+#normalizaciï¿½n de variables
 
 margin = 0.1
 
