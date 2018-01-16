@@ -23,6 +23,12 @@
 
 Random forests build decision trees using bagging to get different samples and combinations of variables to train on, and classify given test data by majority vote of all decision trees. This method is said to be quite robust even to imbalanced data, but does not create bags with equal parts of both classes, so we chose to call the random forest method with our preprocessed data. As the already balanced train samples are then divided into bags the models should give a more or less good result in the testing phase. Although it is possible to define the depth of trees and number of variables to choose we did not set these parameters fixed, because after trying different combinations there was none to create results clearly superior to the others.
 
+\red{Confusion Matrix original}
+
+\red{Confusion Matrix removed}
+
+The two confusion matrices show very similar results and thereby underline the characteristic of being robust, as our preprocessing does not significantly improve the results. This also show in the F2 score of the two test samples which is 0.647 for the original dataset and with 0.652 only a little better for the processed dataset. For the parameters of the models the \textit{caret} package has chosen only one tree and one variable to classify.
+
 \subsection{Neural Network}
 
 \red{
@@ -38,4 +44,13 @@ Random forests build decision trees using bagging to get different samples and c
 \end{itemize}
 }
 
-Neural networks make use of the biological system of neurons nesting functions into each other to classify the given input data. In our case we used a single-hidden-layer neural network. We did not allow skipping becauses a test with the skipping option set did not improve the results. We neither set a regularization parameter because this also let to poorer results when testing new data on the calculated models.
+Neural networks make use of the biological system of neurons nesting functions into each other to classify the given input data. In our case we used a single-hidden-layer neural network. We did not allow skipping becauses a test with the skipping option set did not improve the results. We neither set a fix regularization parameter because this also let to poorer results when testing new data on the calculated models.
+
+\red{Confusion Matrix original}
+
+\red{Confusion Matrix removed}
+
+The confusion matrices of the neural network also show an obvious similarity. It is remarkable that in both cases the neural network predicted about $\frac{3}{4}$ of the true instances correctly which is a good result. But at the same time the predictions of the false instances only get few more than 50\%. This leads to a lower F2 score which is 0.495 for the original and 0.523 for the processed dataset.\\
+As parameters mostly a decay of $\lambda = 0$ and a single neuron are chosen, with few outliers of up to 5 neurons and a decay of $\lambda = 0.0001$.
+
+
