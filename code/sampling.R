@@ -1,6 +1,6 @@
-# Recibe un dataframe que no est√° balanceado y retorna una lista de tama√±o nbags, donde cada elemento es un dataframe con la misma proporci√≥n de TRUES y FALSES
-
-# true index y falseIndex tienen TOODOS los posibles
+#data es un dataframe que no est√° balanceado y retorna una lista de tama√±o nbags, 
+#donde cada elemento es un dataframe con la misma proporci√≥n de TRUES y FALSES
+#true index y falseIndex tienen TOODOS los posibles
 getOneSubset = function(notused, data, trueI, falseI) {
   fI = sample(falseI, length(trueI))
   chosen = c(trueI, fI)
@@ -10,7 +10,9 @@ getOneSubset = function(notused, data, trueI, falseI) {
 }
 
 # para usar esto se supone que ya se ha separado en datos de test y de train
-#retorna una lista de nbags elementos, que son los bags de train
+#df es un dataset de training
+#nbags es el n˙mero de bags
+#retorna una lista de #nbags elementos, que son los bags de train
 getSample = function(df, nbags = 11) {
   trueIndex = which(df$DIED == TRUE)
   l = 1:nrow(df) %in% trueIndex
@@ -22,7 +24,9 @@ getSample = function(df, nbags = 11) {
 }
 
 
-#Recibe un dataframe que ya ha pasado el preprocesado, y retorna una lista con el dataframe de test y con todos los bags de training
+#df es un dataframe que ya ha pasado el preprocesado
+#TestProp es la proporciÛn de datos de test que queremos
+#retorna una lista con el dataframe de test y con todos los bags de training
 generalSample = function(df, TestProp = 1/3) {
   testIndex = sample(1:nrow(df), floor(TestProp*nrow(df)))
   df.test = df[testIndex,]
@@ -36,7 +40,10 @@ generalSample = function(df, TestProp = 1/3) {
 }
 
 #Generar samples de train y test
-#train_data es una lista de dataframes
+#df_orig es el dataframe que contiene todos los datos originales
+#df_rem es el dataframe que contiene todos los datos depuÈs de quitar variables como explicado en la documentaciÛn
+#train_data[.orig, .rem] es una lista de dataframes para training
+#test_data[.orig, .rem] es una lista de dataframes para testing
 getSamples = function(df_orig, df_rem){
   sample.rem <<- generalSample(df_rem)
   test_data.rem <<- sample.rem$test

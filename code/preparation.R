@@ -3,7 +3,8 @@
 library(caret)
 library(ROCR)
 
-# Recibe un dataframe terminado de preprocesar y a proporción que se quiere usar para train y test, y...
+#model es un modelo para evaluar
+#data es un dataset de test
 #retorna un vector de TRUE y FALSE, uno para cada paciente de data
 evaluateModel = function(model, data) {
   result = predict(model, newdata = data)
@@ -24,23 +25,23 @@ evaluate_patient = function(patient_index, resList) {
 }
 
 
-
-# retorna un vector de TRUE o FALSE, que es el resultado de la votación de los modelos para cada paciente
+#superModel es un dataframe de modelos
+#dframe es un dataset de test
+#retorna un vector de TRUE o FALSE, que es el resultado de la votación de los modelos para cada paciente
 evaluateSuperModel = function(superModel, dframe) {
-  results.list.patata = lapply(superModel, evaluateModel, data = dframe)
+  results.list = lapply(superModel, evaluateModel, data = dframe)
   #results.list es una lista que contiene vectores de TRUE y FALSE
-  # el elemento i de la lista contiene los resultados que ha dicho el
-  # primero de los modelos.
+  # el elemento i de la lista contiene los resultados que ha dicho el modelo i
 
   indices = 1:nrow(dframe)
-  r = unlist(lapply(indices, evaluate_patient, resList = results.list.patata))
+  r = unlist(lapply(indices, evaluate_patient, resList = results.list))
   # r es el vector de resultados definitivos, uno para cada paciente
   return(r)
 }
 
-
-#Retorna la puntuación que obtiene el súper modelo con los datos pasados,
-# que se entiende que serán los de test
+#pred son predicciones de un supermodelo
+#obs son los resultados verdaderos del dataset de test
+#Retorna la puntuación que obtiene el súper modelo con los datos pasados, calculado por la metrica f1
 testSuperModel = function(pred, obs) {
   # pred = evaluateSuperModel(superModel, data)
   # obs = data$DIED
@@ -93,25 +94,25 @@ f1 = function(data, lev = NULL, model = NULL) {
 # TODO poner repeats = 10
 trc <- trainControl (
   method="repeatedcv",
-  number=5,
-  repeats=1,
+  number=10,
+  repeats=10,
   summaryFunction = f1
 )
 
 
 #Calcula todos los resultados y retorna un dataframe con estos
 getResults = function(){
-  knn.res.orig = KNN.Result(train_data.orig, test_data.orig)
-  nb.res.orig = NB.Result(train_data.orig, test_data.orig)
-  glm.res.orig = GLM.Result(train_data.orig, test_data.orig)
-  rn.res.orig = RN.Result(train_data.orig, test_data.orig)
-  rf.res.orig = RF.Result(train_data.orig, test_data.orig)
+  knn.res.orig <<- KNN.Result(train_data.orig, test_data.orig)
+  nb.res.orig <<- NB.Result(train_data.orig, test_data.orig)
+  glm.res.orig <<- GLM.Result(train_data.orig, test_data.orig)
+  rn.res.orig <<- RN.Result(train_data.orig, test_data.orig)
+  rf.res.orig <<- RF.Result(train_data.orig, test_data.orig)
 
-  knn.res.rem = KNN.Result(train_data.rem, test_data.rem)
-  nb.res.rem = NB.Result(train_data.rem, test_data.rem)
-  glm.res.rem = GLM.Result(train_data.rem, test_data.rem)
-  rn.res.rem = RN.Result(train_data.rem, test_data.rem)
-  rf.res.rem = RF.Result(train_data.rem, test_data.rem)
+  knn.res.rem <<- KNN.Result(train_data.rem, test_data.rem)
+  nb.res.rem <<- NB.Result(train_data.rem, test_data.rem)
+  glm.res.rem <<- GLM.Result(train_data.rem, test_data.rem)
+  rn.res.rem <<- RN.Result(train_data.rem, test_data.rem)
+  rf.res.rem <<- RF.Result(train_data.rem, test_data.rem)
 
   #F1 score con todo false
   # n = length(thoraric.original$DIED)
@@ -121,8 +122,8 @@ getResults = function(){
   # colnames(allF) = c("pred", "obs")
   # allFalse.orig = f1(data.frame(allF))
 
-  results = matrix(c(knn.res.orig, nb.res.orig, glm.res.orig, rn.res.orig, rf.res.orig,
-                     knn.res.rem, nb.res.rem, glm.res.rem, rn.res.rem, rf.res.rem),
+  results = matrix(c(knn.res.orig$Error, nb.res.orig$Error, glm.res.orig$Error, rn.res.orig$Error, rf.res.orig$Error,
+                     knn.res.rem$Error, nb.res.rem$Error, glm.res.rem$Error, rn.res.rem$Error, rf.res.rem$Error),
                    ncol = 2)
   rownames(results) = c("K-nearest neighbours", "Naive Bayes", "Linear Model",
                         "Neural Net", "Random Forest")

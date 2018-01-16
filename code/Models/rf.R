@@ -1,7 +1,8 @@
 library(randomForest)
 
-#Entrena una random forest
-
+#Entrena un random forest
+#df es un dataframe que contiene un dataset de training
+#retorna un modelo de random forest
 getRF.model = function(df) {
   df$DIED = as.factor(df$DIED)
   
@@ -15,7 +16,9 @@ getRF.model = function(df) {
   return(rf.model)
 }
 
-# Recibe una lista de dataframes que ya están balanceados, y retorna una lista de modelos knn, que tiene el mismo tamaño que la lista de entrada
+#calcula una lista de modelos de random forest 
+#dflist es una lista de dataframes que ya están balanceados
+#retorna una lista de modelos random forest, que tiene el mismo tamaño que la lista de entrada
 getSuper.rf = function(dflist) {
   models.list = lapply(dflist, getRF.model)
   return(models.list)

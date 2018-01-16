@@ -1,5 +1,6 @@
 #Entrena una red neuronal
-
+#df es un dataframe que contiene un dataset de training
+#retorna un modelo de red neuronal
 getRN.model = function(df) {
   df$DIED = as.factor(df$DIED)
   
@@ -13,7 +14,9 @@ getRN.model = function(df) {
   return(rn.model)
 }
 
-# Recibe una lista de dataframes que ya están balanceados, y retorna una lista de modelos knn, que tiene el mismo tamaño que la lista de entrada
+#calcula una lista de modelos de redes neuronales
+#dflist es una lista de dataframes que ya están balanceados
+#retorna una lista de modelos redes neuronales, que tiene el mismo tamaño que la lista de entrada
 getSuper.rn = function(dflist) {
   models.list = lapply(dflist, getRN.model)
   return(models.list)

@@ -11,6 +11,8 @@ source("resultFunctions.R")
 set.seed(42)
 
 getSamples(thoraric.original, thoraric.removed)
-setWeight(1)
+setWeight(2)
 getResults()
 
+#10x10 CV, f2
+resultados1 = getResults()

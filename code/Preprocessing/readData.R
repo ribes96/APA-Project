@@ -1,15 +1,12 @@
+#import de todos los datos y ponerlos nombres
+
 library("foreign")
-# Solo para Albert
-#setwd("/home/hobber/git/APA-Project/dataset")
 pathAlbert = "/home/hobber/git/APA-Project/dataset/ThoraricSurgery.arff"
 pathKerstin = "C:/Users/Kerstin/Documents/Studium/Inhalte/05_APA_Machine Learning (Lluis)/Project/dataset/ThoraricSurgery.arff"
 if (Sys.info()[6] == "hobber") {
   genPath = pathAlbert
  } else {
   genPath = pathKerstin }
-#setwd("../dataset")
-#thoraric = read.arff("ThoraricSurgery.arff")
-#thoraric = read.arff(pathAlbert)
 thoraric = read.arff(genPath)
 names(thoraric) = c(
   "DGN",
