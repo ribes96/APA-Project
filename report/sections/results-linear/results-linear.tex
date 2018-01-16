@@ -17,9 +17,17 @@
 \subsection{Naive Bayes}
 % \todo[inline]{Buscar la biblioteca que lo calcula y aplicarlo a nuestros datos}
 
-Naive Bayes Algorithm has the advantage that it doesn't distinguish between types of data, and it doesn't perform any implicit transformation. The typical disadvantadge of this method is that it assumes independence on the atributes of the data.
+Naive Bayes Algorithm has the advantage that it doesn't distinguish between types of data, and it doesn't perform any implicit transformation. The typical disadvantadge of this method is that it assumes independence on the attributes of the data.
 
-In our case,
+As we have mixed data, the advantage is very appropriate. Looking at our data, it seems like most of the attributes are independent, so we can assume the results will be good. In fact, as we are working with a reduced dataset (in which we have removed some of the attributes), we could expect that the results will be even better in that one.
+
+As this is method is so simple, is doesn't need parameters, so we don't event need the crossvalidation process and we don't have to chose any hyper-parameter.
+
+The results obtained using this model are:
+
+\red{Mosrar los resultados y la confussion matrix}
+
+At the first sight, it stands out the fact that the results are very different from the ``original'' dataset and the ``removed'' one. While ``original'' shows results over \red{value}, the other one shows much better results. This leads us to think that the attributes we removed weren't indeed independent from the others, and keeping theme out has helped the model.
 
 \red{
 \begin{itemize}
@@ -42,6 +50,17 @@ In our case,
 % \end{itemize}
 % }
 \subsection{KNN}
+
+KNN will look for similar patients and will predict the majority among them. This method is very sensitive to very imbalanced data, since with a lot of patients in one class it is very probably that many of them will be very close to the positive cases. Hence, we hope that our resampling method will be suitable for this model, as it only trains it with a balanced dataset of patients.
+
+Nearest Neighbours is also sensitive to non-normalized dataset. Although the method in R used states that is does it, we have also normalized the data, just in case.
+
+\red{Comentar la distancia usada}
+
+Looking at the models created with crossvalidation we see that the average number of neighbours considered is \red{value}. The results obtained using this model are:
+
+\red{Mostrar los resultados y la confussion matrix}
+\red{Comentar los resultados}
 
 \red{
 \begin{itemize}
@@ -72,6 +91,15 @@ In our case,
 % \subsection{RDA}
 
 \subsection{General Linear Model}
+
+The main problem of using this model is that is doesn't distinguish between different data types. For this model all the data are real numbers. As most of our variables are categorical, we assume it will not reflect very well our data. In addition, the power of this method relies on the basis function that the user can define, according to the meaning he knows they may have. We haven't defined any, due to lack of medical knowledge, so this feature won't be used.
+
+The average \(\lambda\)-value for the models after crossvalidation is \red{value}.
+
+The results of running this model on the dataset are:
+
+\red{Poner los resultados y la confussion matrix}
+\red{Comentar los resultados y las diferencias}
 
 \red{
 \begin{itemize}
