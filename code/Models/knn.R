@@ -19,6 +19,7 @@ getKNN.model = function(df) {
 #retorna una lista de modelos knn, que tiene el mismo tamaño que la lista de entrada
 getSuper.knn = function(dflist) {
   models.list = lapply(dflist, getKNN.model)
+  super.KNN <<- models.list
   return(models.list)
 }
 

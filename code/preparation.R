@@ -116,8 +116,8 @@ getResults = function(){
 
 
 
-  results = matrix(c(knn.res.orig$Error, nb.res.orig$Error, glm.res.orig$Error, rn.res.orig$Error, rf.res.orig$Error,
-                     knn.res.rem$Error, nb.res.rem$Error, glm.res.rem$Error, rn.res.rem$Error, rf.res.rem$Error),
+  results = matrix(c(knn.res.orig$Score, nb.res.orig$Score, glm.res.orig$Score, rn.res.orig$Score, rf.res.orig$Score,
+                     knn.res.rem$Score, nb.res.rem$Score, glm.res.rem$Score, rn.res.rem$Score, rf.res.rem$Score),
                    ncol = 2)
   rownames(results) = c("K-nearest neighbours", "Naive Bayes", "Linear Model",
                         "Neural Net", "Random Forest")

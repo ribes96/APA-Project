@@ -11,10 +11,12 @@ source("resultFunctions.R")
 set.seed(42)
 
 getSamples(thoraric.original, thoraric.removed)
+
+#Set weight for F2 score
 setWeight(2)
 
 #10x10 CV, f2
-resultados1 = getResults()
+results = getResults()
 
 #Reference of F1 score with predictions all false
 f = allFalse(thoraric.original)

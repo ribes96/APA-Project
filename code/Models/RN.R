@@ -19,5 +19,6 @@ getRN.model = function(df) {
 #retorna una lista de modelos redes neuronales, que tiene el mismo tamaño que la lista de entrada
 getSuper.rn = function(dflist) {
   models.list = lapply(dflist, getRN.model)
+  super.RN <<- models.list
   return(models.list)
 }

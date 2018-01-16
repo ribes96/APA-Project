@@ -19,5 +19,6 @@ getNB.model = function(df) {
 #retorna una lista de modelos Naive Bayes, que tiene el mismo tamaño que la lista de entrada
 getSuper.NB = function(dflist) {
   models.list = lapply(dflist, getNB.model)
+  super.NB <<- models.list
   return(models.list)
 }

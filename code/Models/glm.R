@@ -20,6 +20,7 @@ getGLM.model = function(df) {
 #retorna una lista de modelos GLM, que tiene el mismo tamaño que la lista de entrada
 getSuper.glm = function(dflist) {
   models.list = lapply(dflist, getGLM.model)
+  super.GLM <<- models.list
   return(models.list)
 }
 
