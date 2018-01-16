@@ -1,4 +1,4 @@
-#eliminar los variables explicadas en la documentación
+#eliminar los variables explicadas en la documentaciï¿½n
 
 keep = c(
 "FVC",

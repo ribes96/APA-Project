@@ -29,7 +29,6 @@ https://www.nuvoair.com/blogs/blog/do-you-know-how-to-interpret-the-results-of-y
 \red{Poner bien la referencia a la página}
 
 
-% \todo[inline]{Redactar que FEV1 está mal, referenciar algún artículo que hable
 % sobre el tema y para justificar que está mal, decidir qué haremos con esos pacientes (eliminarlos, o inferir
 % sus valores de FEV1 en función de sus vecinos) y si los inferimos poner el proceso
 % como lo hemos hecho}
@@ -42,8 +41,6 @@ https://www.nuvoair.com/blogs/blog/do-you-know-how-to-interpret-the-results-of-y
 \caption{Show the ammount of people having each value}
 \end{figure}
 \subsubsection{Coding of non-continuous or non-ordered variables}
-% \todo[inline]{El código que convierta nuestras variables categóricas en tiras
-% de 0s y 1s}
 
 % \red{La mayoría de variables son binarias, y establecemos su tipo en "binary"}
 %
@@ -86,14 +83,10 @@ As we have very few instances we will train and run the models on two different 
 % each of the 16 combinations of keeping DGN1, DGN8, PAD and ASHTMA and we will
 % see which one works better.
 
-% \todo[inline]{Redactar bien esta parte, indicando que puesto que tenemos pocos
-% datos, podemos permitirnos hacer varias ejecuciones, y que probaremos cada
-% combinación de eliminar y no eliminar cada una de estas variables y veremos
-% cual da mejores resultados con la cross-validation}
 
 %
 % \red{Algunas variables están muy poco representadas:}
-% \red{Haremos los experimentos dos veces, uno con todos los datos originales,
+% \red{Haremos los experimentos dos veces, uno con tozdos los datos originales,
 % y otro quitando el atributo de MI, ASHTMA, DGN1 y DGN8, y entonces veremos cual
 % da mejores resultados}
 % \begin{itemize}
@@ -159,7 +152,6 @@ variable is $(-2, +2)$. In the original dataset, the one which contained all the
 % But we have to take into account that we've eliminated \red{22} patients, so the
 % new values are:
 %
-% \todo[inline]{Poner los nuevos valores}
 
 % As the three variables are in the specified range, there is no need of
 % transforming them.
@@ -170,7 +162,6 @@ variable is $(-2, +2)$. In the original dataset, the one which contained all the
 % \red{Kurtosis igual que el skewness, no es necesario porque la mayoría con
 % categóricas}
  % consultar si debemos ignorar este punto
-% \todo[inline]{El código en r para corregir la asimetría (skewness) de los datos}
 % \red{Es aceptable un skewness entre -2 y +2. AGE y FVC ya están en este rango, por
 % lo tanto no hay que hacer nada con ellos. FEV1 sí que se sale, pero los datos que
 % tiene son erroneos. Por lo tanto los transformatemos de alguna forma (eliminarlos
@@ -185,19 +176,51 @@ variable is $(-2, +2)$. In the original dataset, the one which contained all the
 
 % TODO poner las referencias
 
-% \subsection{Feature extraction/selection}
-\subsection{Clustering}
-% \red{hacer varios k-means con distintos valores de k (2,3,4,5,6) para ver si descubrimos algún cluster que nos permita crear una variable nueva}
+% % \subsection{Feature extraction/selection}
+% \subsection{Clustering}
+% % \red{hacer varios k-means con distintos valores de k (2,3,4,5,6) para ver si descubrimos algún cluster que nos permita crear una variable nueva}
+%
+% \red{
+% Quizá quitamos este apartado. Si nos da la vida, hacer muchos kmeans, cojer los mejores y cometnar alguna cosa
+% }
 
-\red{
-Quizá quitamos este apartado. Si nos da la vida, hacer muchos kmeans, cojer los mejores y cometnar alguna cosa
-}
-
-\subsection{Visualization}
-% \red{Hacer MCA  }
-
-\red{Como nuestros datos son mixtos, es complicado encontrar un algoritmo de reducción de dimensión fiable que los pueda soportar. Buscamos alguna tabla un poco relevante que de una visión rápida de los datos, y ya}
+% \subsection{Visualization}
+% % \red{Hacer MCA  }
+%
+% \red{Como nuestros datos son mixtos, es complicado encontrar un algoritmo de reducción de dimensión fiable que los pueda soportar. Buscamos alguna tabla un poco relevante que de una visión rápida de los datos, y ya}
 
 
 \subsection{Renaming of the atritutes}
+
+In order to improve legibility we have renamed some of the atributes in the original dataset for us to better understand the meaning of each one. The following table maps the name in the original dataset to our pre-processed dataset.
+
+\begin{center}
+
+\begin{tabular}{|c|c|}
+    \hline
+    \textbf{Original} & \textbf{Our} \\ \hline\hline
+    DGN & 2 \\ \hline
+    FVC & 2 \\ \hline
+    FEV1 & 2 \\ \hline
+    PERFORMANCE & 2 \\ \hline
+    PAIN & 2 \\ \hline
+    HAEMOPTYSIS & 2 \\ \hline
+    DISPNOEA & 2 \\ \hline
+    COUGH & 2 \\ \hline
+    WEAKNESS & 2 \\ \hline
+    SIZE & 2 \\ \hline
+    DIABETES & 2 \\ \hline
+    MI & 2 \\ \hline
+    PAD & 2 \\ \hline
+    SMOKE & 2 \\ \hline
+    ASTHMA & 2 \\ \hline
+    AGE & 2 \\ \hline
+    DIED & 2 \\ \hline
+    PAIN & 2 \\ \hline
+
+\end{tabular}
+\end{center}
+
+
+
 \red{Poner alguna tabla en la que se indique el cambio de nombres que se ha hecho desde los datos originales y los que nosotros hemos tocado}
