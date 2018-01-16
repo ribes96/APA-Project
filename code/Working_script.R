@@ -12,7 +12,9 @@ set.seed(42)
 
 getSamples(thoraric.original, thoraric.removed)
 setWeight(2)
-getResults()
 
 #10x10 CV, f2
 resultados1 = getResults()
+
+#Reference of F1 score with predictions all false
+f = allFalse(thoraric.original)

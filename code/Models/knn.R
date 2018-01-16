@@ -8,7 +8,7 @@ getKNN.model = function(df) {
       DIED ~.,
       data = df,
       method='kknn',
-      distance = 1, # distance = 1 significa distancia Manhattan
+      kknn.distance = 1, # distance = 1 significa distancia Manhattan
       trControl=trc)
 
       return(knn.model)

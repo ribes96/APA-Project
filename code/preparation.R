@@ -84,7 +84,7 @@ f1 = function(data, lev = NULL, model = NULL) {
   prec = rFpF / pF
   recall = rFpF / rF
 
-  metric = 2 * (weight^2) * prec * recall/((weight^2) * prec + recall)
+  metric = (1 + (weight^2)) * prec * recall/((weight^2) * prec + recall)
   out = metric
   names(out) = c("F1")
   out
@@ -114,13 +114,7 @@ getResults = function(){
   rn.res.rem <<- RN.Result(train_data.rem, test_data.rem)
   rf.res.rem <<- RF.Result(train_data.rem, test_data.rem)
 
-  #F1 score con todo false
-  # n = length(thoraric.original$DIED)
-  # false = rep(FALSE, n)
-  # d = thoraric.original$DIED
-  # allF = matrix(c(false, d), ncol = 2)
-  # colnames(allF) = c("pred", "obs")
-  # allFalse.orig = f1(data.frame(allF))
+
 
   results = matrix(c(knn.res.orig$Error, nb.res.orig$Error, glm.res.orig$Error, rn.res.orig$Error, rf.res.orig$Error,
                      knn.res.rem$Error, nb.res.rem$Error, glm.res.rem$Error, rn.res.rem$Error, rf.res.rem$Error),
@@ -129,5 +123,16 @@ getResults = function(){
                         "Neural Net", "Random Forest")
   colnames(results) = c("Original", "Removed")
   r = data.frame(results)
+  return(r)
+}
+
+#F1 score con todo false - original
+allFalse = function(df){
+  n = length(df$DIED)
+  false = rep(FALSE, n)
+  d = df$DIED
+  allF = matrix(c(false, d), ncol = 2)
+  colnames(allF) = c("pred", "obs")
+  r = f1(data.frame(allF))
   return(r)
 }
