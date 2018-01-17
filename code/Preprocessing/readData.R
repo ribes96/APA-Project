@@ -7,6 +7,16 @@ if (Sys.info()[6] == "hobber") {
   genPath = pathAlbert
  } else {
   genPath = pathKerstin }
+
+#########################
+## MODIFY THIS
+#########################
+genPath = "/home/hobber/git/APA-Project/dataset/ThoraricSurgery.arff"
+
+########################
+## DON'T MODIFY FROM HERE
+#########################
+
 thoraric = read.arff(genPath)
 names(thoraric) = c(
   "DGN",
