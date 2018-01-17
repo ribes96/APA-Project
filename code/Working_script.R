@@ -6,7 +6,7 @@ source("Models/NB.R")
 source("Models/RN.R")
 source("Models/rf.R")
 source("preparation.R")
-source("resultFunctions.R")
+source("resultFunctions.R")       
 
 set.seed(42)
 

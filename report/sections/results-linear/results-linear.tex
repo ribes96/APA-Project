@@ -24,21 +24,63 @@ As this is method is so simple, is doesn't need parameters, so we don't event ne
 
 The results obtained using this model are:
 
-\red{Mosrar los resultados y la confussion matrix}
 
-At the first sight, it stands out the fact that the results are very different from the ``original'' dataset and the ``removed'' one. While ``original'' shows results over \red{value}, the other one shows much better results. This leads us to think that the attributes we removed weren't indeed independent from the others, and keeping theme out has helped the model.
 
-\red{
-\begin{itemize}
-    \item Puede ser adecuado porque admite tipos de datos distintos sin ningún problema
-    \item No necesita ningún hiperparámetro
-    \item Puede ser más sensible a haber quitado algunos atributos, pues afecta a la suposición Naive de independencia
-    \item Mostrar la confussion matrix
-    \item Comentar si muestra buenos o malos resutlados
-    \item Comentar diferencias entre cada uno de los dos dataset, y explicar porq qué
-    \item Identificar por qué suponemos que los resultados son buenos o malos.
-\end{itemize}
-}
+\begin{table}[!htbp]
+\centering
+\caption{NB Original}
+\vspace{0.1cm}
+\label{nb-orig}
+\begin{tabular}{|l|ll|ll}
+\cline{1-3}
+Prediction & \multicolumn{2}{l|}{Reference} &  &  \\
+           & False          & True          &  &  \\ \cline{2-3}
+False      & 32              & 3             &  &  \\
+True       & 93              & 21             &  &  \\ \cline{1-3}
+\end{tabular}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\caption{NB Removed}
+\vspace{0.1cm}
+\label{nb-remov}
+\begin{tabular}{|l|ll|ll}
+\cline{1-3}
+Prediction & \multicolumn{2}{l|}{Reference} &  &  \\
+           & False          & True          &  &  \\ \cline{2-3}
+False      & 122              & 18             &  &  \\
+True       & 5              & 4             &  &  \\ \cline{1-3}
+\end{tabular}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\caption{F2 on NB}
+\vspace{0.1cm}
+\label{nb-f2}
+\begin{tabular}{|l|l|l|}
+\hline
+      & Original & Removed \\ \hline
+Naive Bayes & 0.2990654  & 0.9413580       \\ \hline
+\end{tabular}
+\end{table}
+
+% \red{Mosrar los resultados y la confussion matrix}
+
+At the first sight, it stands out the fact that the results are very different from the ``original'' dataset and the ``removed'' one. While ``original'' shows results over $0.3$, the other one shows much better results. This leads us to think that the attributes we removed weren't indeed independent from the others, and keeping theme out has helped the model.
+
+% \red{
+% \begin{itemize}
+%     \item Puede ser adecuado porque admite tipos de datos distintos sin ningún problema
+%     \item No necesita ningún hiperparámetro
+%     \item Puede ser más sensible a haber quitado algunos atributos, pues afecta a la suposición Naive de independencia
+%     \item Mostrar la confussion matrix
+%     \item Comentar si muestra buenos o malos resutlados
+%     \item Comentar diferencias entre cada uno de los dos dataset, y explicar porq qué
+%     \item Identificar por qué suponemos que los resultados son buenos o malos.
+% \end{itemize}
+% }
 
 % \red{
 % \begin{itemize}
@@ -52,27 +94,72 @@ At the first sight, it stands out the fact that the results are very different f
 
 KNN will look for similar patients and will predict the majority among them. This method is very sensitive to very imbalanced data, since with a lot of patients in one class it is very probably that many of them will be very close to the positive cases. Hence, we hope that our resampling method will be suitable for this model, as it only trains it with a balanced dataset of patients.
 
-Nearest Neighbours is also sensitive to non-normalized dataset. Although the method in R used states that is does it, we have also normalized the data, just in case.
+Nearest Neighbours is also sensitive to non-normalized dataset. Although the method used in R states that is does it, we have also normalized the data, just in case.
 
-\red{Comentar la distancia usada}
+As most of our data is boolean, we have chosen to measure similarity with the Manhattan distance, instead of the Euclidean one. We expect results wil be beter with Manhattan distance since it reflects beter de diferences among patients.
 
-Looking at the models created with crossvalidation we see that the average number of neighbours considered is \red{value}. The results obtained using this model are:
 
-\red{Mostrar los resultados y la confussion matrix}
-\red{Comentar los resultados}
+Looking at the models created with crossvalidation we see that the average number of neighbours considered is \(6.45\) for ``Original'' and \(5.91\) for ``Removed'', which seems like normal values for \(k\). The results obtained using this model are:
 
-\red{
-\begin{itemize}
-    \item Por qué decidimos usar distancia manhattan en vez de euclidea
-    \item Ver, en promedio, cuantos vecinos se han considerado
-    \item Comentar que nosotros ya hemos normalizado los datos y que hemos puesto de forma adecuada las variables categóricas
-    \item Qué podría afectar a este modelo y cómo nos afectará a nosotros.
-    \item Mostrar los resultado y la confussion matrix
-    \item Comentar los resultados
-    \item Comentar las diferencias entre cada uno de los dos datasets
-    \item Comentar por qué creemos que los resultados han sido buenos o malos
-\end{itemize}
-}
+\begin{table}[!htbp]
+\centering
+\caption{KNN Original}
+\vspace{0.1cm}
+\label{knn-orig}
+\begin{tabular}{|l|ll|ll}
+\cline{1-3}
+Prediction & \multicolumn{2}{l|}{Reference} &  &  \\
+           & False          & True          &  &  \\ \cline{2-3}
+False      & 58              & 8             &  &  \\
+True       & 67              & 16             &  &  \\ \cline{1-3}
+\end{tabular}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\caption{KNN Removed}
+\vspace{0.1cm}
+\label{knn-remov}
+\begin{tabular}{|l|ll|ll}
+\cline{1-3}
+Prediction & \multicolumn{2}{l|}{Reference} &  &  \\
+           & False          & True          &  &  \\ \cline{2-3}
+False      & 73              & 8             &  &  \\
+True       & 54              & 14             &  &  \\ \cline{1-3}
+\end{tabular}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\caption{F2 on KNN}
+\vspace{0.1cm}
+\label{knn-f2}
+\begin{tabular}{|l|l|l|}
+\hline
+      & Original & Removed \\ \hline
+K-neares neighbours & 0.5123675 & 0.6196944          \\ \hline
+\end{tabular}
+\end{table}
+
+% \red{Mostrar los resultados y la confussion matrix}
+% \red{Comentar los resultados}
+
+The $F2$ score is not very good for non of the datasets, but looking at the confussion matrix is seems that the model achieves very well the task of avoiding real positives predicted as negatives.
+
+\red{Intentar ver por qué ha pasado esto}
+
+% \red{
+% \begin{itemize}
+%     \item Por qué decidimos usar distancia manhattan en vez de euclidea
+%     \item Ver, en promedio, cuantos vecinos se han considerado
+%     \item Comentar que nosotros ya hemos normalizado los datos y que hemos puesto de forma adecuada las variables categóricas
+%     \item Qué podría afectar a este modelo y cómo nos afectará a nosotros.
+%     \item Mostrar los resultado y la confussion matrix
+%     \item Comentar los resultados
+%     \item Comentar las diferencias entre cada uno de los dos datasets
+%     \item Comentar por qué creemos que los resultados han sido buenos o malos
+% \end{itemize}
+% }
 
 % \red{Si no hacemos nada para desbalancear los datos, hay que usar una k muy pequeña}
 
@@ -93,25 +180,67 @@ Looking at the models created with crossvalidation we see that the average numbe
 
 The main problem of using this model is that is doesn't distinguish between different data types. For this model all the data are real numbers. As most of our variables are categorical, we assume it will not reflect very well our data. In addition, the power of this method relies on the basis function that the user can define, according to the meaning he knows they may have. We haven't defined any, due to lack of medical knowledge, so this feature won't be used.
 
-The average \(\lambda\)-value for the models after crossvalidation is \red{value}.
+% The average \(\lambda\)-value for the models after crossvalidation is \red{value}.
 
 The results of running this model on the dataset are:
 
-\red{Poner los resultados y la confussion matrix}
-\red{Comentar los resultados y las diferencias}
+\begin{table}[!htbp]
+\centering
+\caption{GLM Original}
+\vspace{0.1cm}
+\label{glm-orig}
+\begin{tabular}{|l|ll|ll}
+\cline{1-3}
+Prediction & \multicolumn{2}{l|}{Reference} &  &  \\
+           & False          & True          &  &  \\ \cline{2-3}
+False      & 80              & 14             &  &  \\
+True       & 45              & 10             &  &  \\ \cline{1-3}
+\end{tabular}
+\end{table}
 
-\red{
-\begin{itemize}
-    \item Los datos se considera todos como reales, y no entiende de booleanos o categóricas
-    \item No hemos usado funciones de base especiales, solamente la identidad con cada uno de los atributos.
-    \item Ver en promedio cual ha sido la regularización
-    \item Qué puede afectar a este modelo y cómo nos va a afectar a nosotros
-    \item Mostrar los resultados y la confussion matrix
-    \item Comentar los resultados
-    \item Cometnar las diferencias entre cada uno de los datasets
-    \item Comentar por qué creemos que los resultados han sido buenos o malos
-\end{itemize}
-}
+\begin{table}[!htbp]
+\centering
+\caption{GLM Removed}
+\vspace{0.1cm}
+\label{glm-remov}
+\begin{tabular}{|l|ll|ll}
+\cline{1-3}
+Prediction & \multicolumn{2}{l|}{Reference} &  &  \\
+           & False          & True          &  &  \\ \cline{2-3}
+False      & 86              & 13             &  &  \\
+True       & 41              & 9             &  &  \\ \cline{1-3}
+\end{tabular}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\caption{F2 on GLM}
+\vspace{0.1cm}
+\label{glm-f2}
+\begin{tabular}{|l|l|l|}
+\hline
+      & Original & Removed \\ \hline
+Linear Model & 0.6734007 & 0.7084020       \\ \hline
+\end{tabular}
+\end{table}
+
+% \red{Poner los resultados y la confussion matrix}
+% \red{Comentar los resultados y las diferencias}
+
+The $F2$ score is not as bad as expected. It fact, it performs better than KNN despite the number of rTpF being higher.
+
+% \red{
+% \begin{itemize}
+%     \item Los datos se considera todos como reales, y no entiende de booleanos o categóricas
+%     \item No hemos usado funciones de base especiales, solamente la identidad con cada uno de los atributos.
+%     \item Ver en promedio cual ha sido la regularización
+%     \item Qué puede afectar a este modelo y cómo nos va a afectar a nosotros
+%     \item Mostrar los resultados y la confussion matrix
+%     \item Comentar los resultados
+%     \item Cometnar las diferencias entre cada uno de los datasets
+%     \item Comentar por qué creemos que los resultados han sido buenos o malos
+% \end{itemize}
+% }
 
 
 

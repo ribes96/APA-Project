@@ -9,48 +9,126 @@
 
 \subsection{Random Forest}
 
-\red{
-\begin{itemize}
-    \item Puesto que random forest ya hace algún tipo de resampling, quizá era mejor probarlo con el dataset preprocesado original, y no con los 51 bags que hemos creado. Comentar por qué hemos hecho esto y lo que podría pasar
-    \item Comentar los tipos de bosques que han quedado después del crossvalidation: la cantidad de árboles que tiene cada uno, el mínimo de instancias en cada nodo, la cantidad de atributos que se consideran, etc.
-    \item Qué puede afectar a este modelo y cómo nos va a afectar a nosotros
-    \item Mostrar los resultados y la confussion matrix
-    \item Comentar los resultados
-    \item Comentar las diferencias entre cada uno de los dos datasets
-    \item Comentar por qué creemos que los resultados han sido buenos o malos
-\end{itemize}
-}
+% \red{
+% \begin{itemize}
+%     \item Puesto que random forest ya hace algún tipo de resampling, quizá era mejor probarlo con el dataset preprocesado original, y no con los 51 bags que hemos creado. Comentar por qué hemos hecho esto y lo que podría pasar
+%     \item Comentar los tipos de bosques que han quedado después del crossvalidation: la cantidad de árboles que tiene cada uno, el mínimo de instancias en cada nodo, la cantidad de atributos que se consideran, etc.
+%     \item Qué puede afectar a este modelo y cómo nos va a afectar a nosotros
+%     \item Mostrar los resultados y la confussion matrix
+%     \item Comentar los resultados
+%     \item Comentar las diferencias entre cada uno de los dos datasets
+%     \item Comentar por qué creemos que los resultados han sido buenos o malos
+% \end{itemize}
+% }
 
 Random forests build decision trees using bagging to get different samples and combinations of variables to train on, and classify given test data by majority vote of all decision trees. This method is said to be quite robust even to imbalanced data, but does not create bags with equal parts of both classes, so we chose to call the random forest method with our preprocessed data. As the already balanced train samples are then divided into bags the models should give a more or less good result in the testing phase. Although it is possible to define the depth of trees and number of variables to choose we did not set these parameters fixed, because after trying different combinations there was none to create results clearly superior to the others.
 
-\red{Confusion Matrix original}
+\begin{table}[!htbp]
+\centering
+\caption{RF Original}
+\vspace{0.1cm}
+\label{rf-orig}
+\begin{tabular}{|l|ll|ll}
+\cline{1-3}
+Prediction & \multicolumn{2}{l|}{Reference} &  &  \\
+           & False          & True          &  &  \\ \cline{2-3}
+False      & 76              & 11             &  &  \\
+True       & 49              & 13             &  &  \\ \cline{1-3}
+\end{tabular}
+\end{table}
 
-\red{Confusion Matrix removed}
+\begin{table}[!htbp]
+\centering
+\caption{RF Removed}
+\vspace{0.1cm}
+\label{rf-remov}
+\begin{tabular}{|l|ll|ll}
+\cline{1-3}
+Prediction & \multicolumn{2}{l|}{Reference} &  &  \\
+           & False          & True          &  &  \\ \cline{2-3}
+False      & 78              & 12             &  &  \\
+True       & 49              & 10             &  &  \\ \cline{1-3}
+\end{tabular}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\caption{F2 on RF}
+\vspace{0.1cm}
+\label{rf-f2}
+\begin{tabular}{|l|l|l|}
+\hline
+      & Original & Removed \\ \hline
+Random Forest & 0.6473595 & 0.6521739       \\ \hline
+\end{tabular}
+\end{table}
+
+% \red{Confusion Matrix original}
+
+% \red{Confusion Matrix removed}
 
 The two confusion matrices show very similar results and thereby underline the characteristic of being robust, as our preprocessing does not significantly improve the results. This also show in the F2 score of the two test samples which is 0.647 for the original dataset and with 0.652 only a little better for the processed dataset. For the parameters of the models the \textit{caret} package has chosen only one tree and one variable to classify.
 
 \subsection{Neural Network}
 
-\red{
-\begin{itemize}
-    \item Ver en promedio cuantas neuronas había en cada modelo y cuanta regularización se ha usado, después de los datos de crossvalidation
-    \item Indicar que no se han hecho skips, y que únicamente hay una capa oculta\ldots
-    \item No hace ningún tipo de distinción entre los tipos de datos de entrada. Para él tozdo son reales, los booleanos también
-    \item Qué puede afectar a este modelo y cómo nos puede afectar a nosotros
-    \item Mostrar los resultados y la confussion matrix
-    \item Comentar los resultados
-    \item Comentar las diferencias entre cada uno de los dos datasets
-    \item Comentar por qué creemos que los resultados han sido buenos o malos
-\end{itemize}
-}
+% \red{
+% \begin{itemize}
+%     \item Ver en promedio cuantas neuronas había en cada modelo y cuanta regularización se ha usado, después de los datos de crossvalidation
+%     \item Indicar que no se han hecho skips, y que únicamente hay una capa oculta\ldots
+%     \item No hace ningún tipo de distinción entre los tipos de datos de entrada. Para él tozdo son reales, los booleanos también
+%     \item Qué puede afectar a este modelo y cómo nos puede afectar a nosotros
+%     \item Mostrar los resultados y la confussion matrix
+%     \item Comentar los resultados
+%     \item Comentar las diferencias entre cada uno de los dos datasets
+%     \item Comentar por qué creemos que los resultados han sido buenos o malos
+% \end{itemize}
+% }
 
-Neural networks make use of the biological system of neurons nesting functions into each other to classify the given input data. In our case we used a single-hidden-layer neural network. We did not allow skipping becauses a test with the skipping option set did not improve the results. We neither set a fix regularization parameter because this also let to poorer results when testing new data on the calculated models.
+Neural networks make use of the biological system of neurons nesting functions into each other to classify the given input data. In our case we used a single-hidden-layer neural network. We did not allow skipping becauses a test with the skipping option set did not improve the results.\red{¿En serio?} We neither set a fix regularization parameter because this also let to poorer results when testing new data on the calculated models.
 
-\red{Confusion Matrix original}
+\begin{table}[!htbp]
+\centering
+\caption{NN Original}
+\vspace{0.1cm}
+\label{nn-orig}
+\begin{tabular}{|l|ll|ll}
+\cline{1-3}
+Prediction & \multicolumn{2}{l|}{Reference} &  &  \\
+           & False          & True          &  &  \\ \cline{2-3}
+False      & 56              & 10             &  &  \\
+True       & 69              & 14             &  &  \\ \cline{1-3}
+\end{tabular}
+\end{table}
 
-\red{Confusion Matrix removed}
+\begin{table}[!htbp]
+\centering
+\caption{NN Removed}
+\vspace{0.1cm}
+\label{nn-remov}
+\begin{tabular}{|l|ll|ll}
+\cline{1-3}
+Prediction & \multicolumn{2}{l|}{Reference} &  &  \\
+           & False          & True          &  &  \\ \cline{2-3}
+False      & 60              & 6             &  &  \\
+True       & 67              & 16             &  &  \\ \cline{1-3}
+\end{tabular}
+\end{table}
 
-The confusion matrices of the neural network also show an obvious similarity. It is remarkable that in both cases the neural network predicted about $\frac{3}{4}$ of the true instances correctly which is a good result. But at the same time the predictions of the false instances only get few more than 50\%. This leads to a lower F2 score which is 0.495 for the original and 0.523 for the processed dataset.\\
-As parameters mostly a decay of $\lambda = 0$ and a single neuron are chosen, with few outliers of up to 5 neurons and a decay of $\lambda = 0.0001$.
+\begin{table}[!htbp]
+\centering
+\caption{F2 on NN}
+\vspace{0.1cm}
+\label{nn-f2}
+\begin{tabular}{|l|l|l|}
+\hline
+      & Original & Removed \\ \hline
+Neural New & 0.4946996 & 0.5226481       \\ \hline
+\end{tabular}
+\end{table}
 
+% \red{Confusion Matrix original}
 
+% \red{Confusion Matrix removed}
+
+The confusion matrices of the neural network also show an obvious similarity. It is remarkable that in both cases the neural network predicted about \(\frac{3}{4}\) of the true instances correctly which is a good result. But at the same time the predictions of the false instances only get few more than 50\%. This leads to a lower F2 score which is 0.495 for the original and 0.523 for the processed dataset.\\
+As parameters mostly a decay of \(\lambda = 0\) and a single neuron are chosen, with few outliers of up to 5 neurons and a decay of \(\lambda = 0.0001\).
