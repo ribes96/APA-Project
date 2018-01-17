@@ -36,22 +36,8 @@ For each patient we have 16 different attributes of which three are numerical, a
 the rest is categorical. From those, ten are binary variables. The response attribute is
 also binary.
 
-\subsection{Instructions for running the code}
-%\red{
-%\begin{itemize}
-   % \item Cual debe ser el working directory
-   % \item La variable que contiene el path que tiene que modificar
-    %\item Los resultados ya están calculados en un working space, para ahorrar tiempo.
-   % \item TODO: implement relative path to data in R or create variable to set this path
-%\end{itemize}
-%}
 
-This work comes with the file \texttt{code/.RData} containing the imported dataset, all the defined functions and models and the results of all tested models.
-If for any reason the code should be rerun, the proceeding is as follows:\\
-To run the code it is necessary to change the working directory of R to the directory \texttt{code} which is contained in the archive of this work. In the file \texttt{Working\_script.R} all needed R scripts which import the given dataset, do preprocessing and define necessary functions and models are called. The method \texttt{getSamples()} creates the test and training samples; with the method \texttt{setWeight(value)} the weight of the F2 score could be changed. The call \texttt{getResults()} trains and evaluates all the models which takes about 30 minutes on a computer with 8GB RAM and SSD installed. The variable \texttt{results} contains a table with all the F2 scores of the models. The variable \texttt{f} contains the F2 score for a ``model'' that always predicts false which we thought an interesting comparison to the calculated models.\\
-To see information about the single models there are different variables of the form \texttt{knn.res.orig} (KNN model results for the original dataset) for every model. Each of these contains a list of eleven models which can be accessed by \texttt{knn.res.orig\$SuperModel[[index]]}, the F2 score \texttt{knn.res.orig\$Score} and the confusion matrix \texttt{knn.res.orig\$ConfMatrix}.
-
-\subsubsection{Needed packages}
+\subsection{Needed packages}
 
 The following R packages have been used in this work:
 
@@ -60,4 +46,5 @@ The following R packages have been used in this work:
 \item{randomForest}
 \item{caret}
 \item{ROCR}
+\item{kknn}
 \end{itemize}

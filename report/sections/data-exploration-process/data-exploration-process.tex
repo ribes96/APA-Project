@@ -4,7 +4,7 @@
 
 \section{Data exploration process}
 
-\subsection{Pre-processing}
+\subsection{Preprocessing}
 \subsubsection{Treatment of missing values}
 Our dataset does not have missing values, so there is no need to treat them.
 \subsubsection{Treatment of anomalous values}
@@ -109,7 +109,7 @@ We have not created any new variable as most of the ones we have are logical and
 % \red{Quizá es interesante añadir la variable FEV/FEV1}
 \subsubsection{Normalization of the variables}
 We need to normalize only numeric variables, which are AGE, FVC and FEV1. For FVC and FEV1 the range will correspond to the maximum and minimum observed values with a margin of 10\%. To normalize AGE we will only consider cases between $0$ and $100$ years old. \\
-As we have converted the variables ``PERFORMANCE'' and ``SIZE'' to numeric (as we will see in section \ref{sec-var-trans}) we also need to normalize them.
+As we have converted the variables ``PERFORMANCE'' and ``SIZE'' to numeric, these are also normalized within 1-3 and 1-4.
 
 % For FVC and FEV1 the maximum will correspond to $1.1K_{FVC}$ and $1.1K_{FEV1}$,
 % where $K_{FVC}$ is the maximum observed FVC and $K_{FEV1}$ is the maximum
