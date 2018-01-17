@@ -15,18 +15,18 @@ The age of the patients is not well distributed. Most of them are over 60 years 
 \subsubsection{Treatment of incoherent values} \label{sec-inco-val}
 The variable FEV1, which is the Forced Expiratory Volume in 1 second, shows a few anomalously high values. Depending on factors like age and sex of a patient the average value of the FEV1 should be around 3-6 litres, whereas the dataset shows values up to 86. As most of the values are within 0 and 10 we assume that the dataset contains the FEV1 in litres. To decide which values are to be determined as outliers we calculate the FEV1/FVC ratio which gives the percentage of the lung volume exhaled in the first second over the whole exhaled volume. All patients having a unrealistic ratio higher than 100\%, which are 22 patients, are determined to be outliers and eliminated. We chose not to apply any stricter constraints because the dataset does not include the sex of the patients which influences the normal values of the FEV1 much.
 
-Source of knowledge about FEV1 and FVC:
-https://www.nuvoair.com/blogs/blog/do-you-know-how-to-interpret-the-results-of-your-spirometry-test
+Source of knowledge about FEV1 and FVC: \cite{pagina-fvc}
+% https://www.nuvoair.com/blogs/blog/do-you-know-how-to-interpret-the-results-of-your-spirometry-test
 
-\red{El enlace antiguo ha caido, ahora es este:}
+% \red{El enlace antiguo ha caido, ahora es este:}
 
-\red{https://www.nuvoair.com/do-you-know-how-to-interpret-the-results-of-your-spirometry-test.html}
+% \red{https://www.nuvoair.com/do-you-know-how-to-interpret-the-results-of-your-spirometry-test.html}
 
 % \red{No sé si por outliers se entiende a datos que son verdad pero que son
 % raros o si son datos que no son correctos, porque se van demasiado}
 
 % \red{Referenciar quizá el histograma con FEV1}
-\red{Poner bien la referencia a la página}
+% \red{Poner bien la referencia a la página}
 
 
 % sobre el tema y para justificar que está mal, decidir qué haremos con esos pacientes (eliminarlos, o inferir
@@ -133,7 +133,9 @@ As we have converted the variables ``PERFORMANCE'' and ``SIZE'' to numeric (as w
 % \red{Solo se pueden normalizar FVC, FEV1 y AGE. Miraremos cuales dan mejores
 % resultados}
 \subsubsection{Transformation of the variables} \label{sec-var-trans}
-Acording to \red{the paper we found} the acceptable range for skewness in a numeric
+Searching through the web we have found that
+% Acording to \red{the paper we found} 
+the acceptable range for skewness in a numeric
 variable is $(-2, +2)$. In the original dataset, the one which contains all the patients, the skewness of the variables AGE, FVC and FEV were out of this range. But after eliminating $22$ of the patients (in \ref{sec-inco-val}) all of them are inside the acceptable range, so there's no need to transform them.
 
 % \begin{center}
