@@ -20,3 +20,11 @@ If you want to run all the code, you need to do:
 - Make sure your working directory is the one called "code"
 - Modify the script named readData.R in the signaled part so that genPath contains the path to $PROJECT_DIR/dataset/ThoraricSurgery.arff
 - Run the script Working_script.R
+
+
+To run the code you need to have installed the follwing packages:
+- klaR
+- randomForest
+- caret
+- ROCR
+- kknn
