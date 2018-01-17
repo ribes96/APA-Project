@@ -10,9 +10,9 @@ we will study a dataset with real lung cancer patients.
 
 As this is very sensitive information, our priority will be to minimize the
 amount of false negatives, i.e., avoid predicting a patient will not die within
-one year when it certainly does.
+one year when he actually does.
 
-
+\red{Put link in the references instead of in the text?}
 The data is taken from
 \url{https://archive.ics.uci.edu/ml/datasets/Thoracic+Surgery+Data#}
 \cite{zieba2013boosted}
@@ -24,23 +24,40 @@ resections for primary lung cancer in the years from 2007 to 2011. For each
 patient we are given information about his diagnosis and effects produced
 by the cancer.
 
-The dataset is very limited in the number of instances available: it only has
-470. In addition, the distribution of the predicted class isn't quite balanced,
-since only 70 of the patients died in one year period. This may become a problem
-in some of the prediction models due to the fact that the results will be biased
-towards the biggest class. However, we can suppose that the data has been
-collected uniformly and that this proportion is similar to the real one.
+The dataset is very limited in the number of instances available as it only contains
+data about 470 patients. In addition, the distribution of the predicted class is not quite 
+balanced,
+since only 70 of the patients died in a one year period after their surgery. This may 
+become a problem in some of the prediction models due to the fact that the results 
+will be biased towards the bigger class. However, we can suppose that the data has been
+collected uniformly and that this proportion is similar to the probability of the real population.
 
-For each patient we have 16 different atributes. 3 of them are numerical, and
-the rest are categorical. From those, 10 are binary. The response atribute is
+For each patient we have 16 different attributes of which three are numerical, and
+the rest is categorical. From those, ten are binary variables. The response attribute is
 also binary.
 
 \subsection{Instructions for running the code}
 \red{
 \begin{itemize}
-    \item Cual debe ser el working directory
+   % \item Cual debe ser el working directory
     \item La variable que contiene el path que tiene que modificar
-    \item Los resultados ya están calculados en un working space, para ahorrar tiempo.
+    %\item Los resultados ya están calculados en un working space, para ahorrar tiempo.
+    \item TODO: implement relative path to data in R or create variable to set this path
 \end{itemize}
 }
+
+This work comes with the file \textit{code/.RData} containing the imported dataset, all the defined functions and models and the results of all tested models. 
+If for any reason the code should be rerun, the proceeding is as follows:\\
+To run the code it is necessary to change the working directory of R to the folder \textit{code} which is contained in the archive of this work. In the file \textit{Working\_script.R} all needed R scripts which import the given dataset, do preprocessing and define necessary functions and models are called. The method \textit{getSamples()} creates the test and training samples; with the method \textit{setWeight(value)} the weight of the F2 score could be changed. The call \textit{getResults()} trains and evaluates all the models which takes about 30 minutes on a computer with 8GB RAM and SSD installed. The variable \textit{results} contains a table with all the F2 scores of the models. The variable \textit{f} contains the F2 score for a "model" that always predicts false which we thought an interesting comparison to the calculated models.\\
+To see information about the single models there are different variables of the form \textit{knn.res.orig} (KNN model results for the original dataset) for every model. Each of these contains a list of eleven models which can be accessed by \textit{knn.res.orig\$SuperModel[[index]]}, the F2 score \textit{knn.res.orig\$Score} and the confusion matrix \textit{knn.res.orig\$ConfMatrix}.
+
 \subsubsection{Needed packages}
+
+The following R packages have been used in this work:
+
+\begin{itemize}
+\item{klaR}
+\item{randomForest}
+\item{caret}
+\item{ROCR}
+\end{itemize}
